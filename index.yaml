@@ -1,0 +1,8 @@
+indexes:
+
+- kind: Word
+  properties:
+  - name: englishWord
+  - name: gaelicWord
+  - name: pronunciation
+  - name: plural
