@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css" />
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
+    <script src="gaelic.js"></script>
+</head>
+<body>
+<div id="home" data-role="page">
+    <div data-role="header">
+        <h2 id="date">Date</h2>
+        <h2 id="time">Time</h2>
+        <a id="signin" data-role="button" href="#loginPage">Sign in</a>
+        <a id="register" data-role="button" href="#logout">Logout</a>
+    </div>
+    <div data-role="content">
+
+        <ul data-role="listview" data-inset="true">
+            <li><a id="translate" href="#translatePage">Singluar Word Translation</a></li>
+            <li><a id="aToZSearch" href="#searchPage">A-Z Search</a></li>
+            <li><a id="lessons" href="#lessonPage">Lessons</a></li>
+            <li><a id="settings" href="#settingsPage">Settings</a></li>
+        </ul>
+    </div>
+    <div data-role="footer" data-position="fixed" class="ui-bar">
+        <nav>
+        </nav>
+    </div>
+</div>
+
+<div id="translatePage" data-role="page">
+    <div data-role="header">
+        <h1>Translate</h1>
+        <a href="#" data-rel="back" data-icon="back">Back</a>
+<!--        <li><a id="SignIn" href="#">Sign in</a></li>
+        <li><a id="Register" href="#logout">Logout</a></li> -->
+    </div>
+    <div data-role="content">
+        <select>
+            <option value="translate1">English - Gaelic</option>
+            <option value="translate2">Gaelic - English</option>
+        </select>
+        <label for="singleWord"></label>
+        <input id="singleWord" type="text"/>
+
+        <ul data-role="listview" data-inset="true">
+            <li><a id="translateWord">Translate</a></li>
+        </ul>
+
+        <label for="answer"></label>
+        <input id="answer" type="text"/>
+    </div>
+    <div data-role="footer" data-position="fixed" class="ui-bar">
+        <nav>
+        </nav>
+    </div>
+</div>
+
+<div id="searchPage" data-role="page">
+    <div data-role="header">
+        <h1>A To Z Search</h1>
+        <a href="#" data-rel="back" data-icon="back">Back</a>
+<!--        <li><a id="SignIn" href="#logout">Sign in</a></li>
+        <li><a id="Register" href="#logout">Logout</a></li> -->
+    </div>
+    <div data-role="content">
+        <input id="searchWord" type="text" value="Enter word to search"/>
+        <button class="btn">Search</button>
+        <textarea name="lessonField" id="lessonField" cols="30" rows="40"></textarea>
+    </div>
+    <div data-role="footer" data-position="fixed" class="ui-bar">
+        <nav>
+        </nav>
+    </div>
+</div>
+
+<div id="lessonPage" data-role="page">
+    <div data-role="header">
+        <h1></h1>
+        <a href="#" data-rel="back" data-icon="back">Back</a>
+<!--        <li><a id="SignIn" href="#logout">Sign in</a></li>
+        <li><a id="Register" href="#logout">Logout</a></li> -->
+    </div>
+    <div data-role="content">
+        <ul data-role="listview" data-inset="true">
+            <li><a id="sentenceStructire" href="#lessonResult">Sentence Structure</a></li>
+            <li><a id="grammar" href="#grammarpage">Grammar</a></li>
+        </ul>
+    </div>
+    <div data-role="footer" data-position="fixed" class="ui-bar">
+        <nav>
+        </nav>
+    </div>
+</div>
+
+<div id="grammarpage" data-role="page">
+    <div data-role="header">
+        <h1></h1>
+        <a href="#" data-rel="back" data-icon="back">Back</a>
+<!--        <li><a id="SignIn" href="#logout">Sign in</a></li>
+        <li><a id="Register" href="#logout">Logout</a></li> -->
+    </div>
+    <div data-role="content">
+        <ul id="questions" data-role="listview" data-inset="true">
+            <!-- Questions go here. -->
+        </ul>
+        <a href="#" id="previous" data-role="button" data-inline="true" >Previous</a>
+        <a href="#" id="next" data-role="button" data-inline="true" >Next</a>
+    </div>
+    <div data-role="footer" data-position="fixed" class="ui-bar">
+        <nav>
+        </nav>
+    </div>
+</div>
+
+<div id="settingsPage" data-role="page">
+    <div data-role="header">
+        <h1>username</h1>
+        <a href="#" data-rel="back" data-icon="back">Back</a>
+
+    </div>
+    <div data-role="content">
+        <label for="gps">GPS Data</label>
+        <input type="checkbox" data-role="flipswitch" name="switch" id="gps">
+        <label for="offlineData">Offline Data</label>
+        <input type="checkbox" data-role="flipswitch" name="switch" id="offlineData">
+    </div>
+    <div data-role="footer" data-position="fixed" class="ui-bar">
+        <nav>
+          <div data-role="navbar">
+<!--              <a data-role="button" data-inline="true" id="SignIn" href="#logout">Sign in</a>
+              <a data-role="button" data-inline="true" id="Register" href="#logout">Logout</a> -->
+          </div>
+        </nav>
+    </div>
+</div>
+<div id="loginPage" data-role="page">
+    <div data-role="header">
+        <h1>Log-In</h1>
+        <a href="#" data-rel="back" data-icon="back">Back</a>
+    </div>
+    <div data-role="content">
+        <form id="loginForm">
+            <label for="useremail">Email:</label>
+            <input type="text" id="useremail" size="30" placeholder="example@email.com"/>
+            <label for="userpassword">Password:</label>
+            <input type="password" id="userpassword" size="20"/>
+            <button data-role="button" id="ok">Log-In</button><button data-role="button" id="cancel">Cancel</button>
+        </form>
+    </div>
+    <div data-role="footer" data-position="fixed" class="ui-bar">
+        <nav>
+        </nav>
+    </div>
+</div>
+</body>
+</html>
