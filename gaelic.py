@@ -188,6 +188,9 @@ class LoadWord(webapp2.RequestHandler):
 		word.gaelicWord = 'Halo'
 		word.pronunciation = 'pronounce'
 		word.plural = 'plural'
+		word.put()
+
+		word = Word()
 		word.englishWord = 'Welcome'
 		word.gaelicWord = 'Faite'
 		word.pronunciation = 'pronounce'
