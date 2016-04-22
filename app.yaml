@@ -22,7 +22,7 @@ handlers:
   static_dir: stylesheets 
 
 - url: /html
-  static_dir: html
+  static_dir: Client
 
 - url: /.*
   script: gaelic.app

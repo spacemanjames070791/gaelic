@@ -14,11 +14,36 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
 import webapp2
 from google.appengine.ext import ndb
 from webapp2_extras import json
+import codecs
 
 import logging
+
+link = """
+<html><head><title>auws-msgboard Demo App</title></head>
+<body>
+	<h1>auws-msgboard Demo App</h1>
+	<p>This app is a simple demonstration client-server app for mobile devices.</p>
+	<p>The app uses...</p>
+	<ul>
+		<li>Google App Engine for a server</li>
+		<li>HTML5+Javascritp+CSS for the client</li>
+		<li>jQuery and jQuery Mobile as the client framework</li>
+		<li>JSON/JSONP as the app protocol</li>
+	</ul>
+	<p>The Google App Engine server is set up as a REST server, althugh there is only
+	one resource URL defined.  Browsing to http://&lt;app domain&gt;/users/&lt;user-id&gt; will
+	return the last 6 messages from the specified user.  The URL http://&lt;app domain&gt;/users/
+	will return messages from ANY users.</p>
+	<p>Posting a message to http://&lt;app domain&gt;/users/&lt;user-id&gt; will add a message
+	to the server's database.</p>
+
+	<a href="html/index.html">Go to app main page</a>
+</body>
+"""
 
 class Word(ndb.Model):
 	englishWord = ndb.StringProperty()
@@ -199,7 +224,7 @@ class LoadWord(webapp2.RequestHandler):
 
 class MainHandler(webapp2.RequestHandler):
 	def get(self):
-		self.response.write("Home page")
+		self.response.write(link)
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
