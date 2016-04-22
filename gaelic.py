@@ -170,6 +170,7 @@ class TranslateWord(webapp2.RequestHandler):
 		jsonresponse = ''
 		callback = self.request.get('callback')
 		words = Word.query()
+		words = words.filter(Word.englishWord==englishWord)
 		# Now build a response of JSON messages..
 		for wd in words:
 			jsonresponse += wd.toJSON() + ','
@@ -185,6 +186,10 @@ class LoadWord(webapp2.RequestHandler):
 		word = Word()
 		word.englishWord = 'Hello'
 		word.gaelicWord = 'Halo'
+		word.pronunciation = 'pronounce'
+		word.plural = 'plural'
+		word.englishWord = 'Welcome'
+		word.gaelicWord = 'Faite'
 		word.pronunciation = 'pronounce'
 		word.plural = 'plural'
 		word.put()
