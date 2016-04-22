@@ -25,4 +25,4 @@ handlers:
   static_dir: html
 
 - url: /.*
-  script: gaelic.app
+  script: gaelic.py
