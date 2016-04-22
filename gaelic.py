@@ -1,3 +1,4 @@
+# - *- coding: utf- 8 -*-
 #!/usr/bin/env python
 #
 # Copyright 2007 Google Inc.
@@ -25,21 +26,7 @@ import logging
 link = """
 <html><head><title>auws-msgboard Demo App</title></head>
 <body>
-	<h1>auws-msgboard Demo App</h1>
-	<p>This app is a simple demonstration client-server app for mobile devices.</p>
-	<p>The app uses...</p>
-	<ul>
-		<li>Google App Engine for a server</li>
-		<li>HTML5+Javascritp+CSS for the client</li>
-		<li>jQuery and jQuery Mobile as the client framework</li>
-		<li>JSON/JSONP as the app protocol</li>
-	</ul>
-	<p>The Google App Engine server is set up as a REST server, althugh there is only
-	one resource URL defined.  Browsing to http://&lt;app domain&gt;/users/&lt;user-id&gt; will
-	return the last 6 messages from the specified user.  The URL http://&lt;app domain&gt;/users/
-	will return messages from ANY users.</p>
-	<p>Posting a message to http://&lt;app domain&gt;/users/&lt;user-id&gt; will add a message
-	to the server's database.</p>
+	<h1>Gaelic Translation Services</h1>
 
 	<a href="html/index.html">Go to app main page</a>
 </body>
@@ -207,16 +194,16 @@ class TranslateWord(webapp2.RequestHandler):
 class LoadWord(webapp2.RequestHandler):
 
 	def get(self):
-		word = Word()
+		word = Word(id='Hello')
 		word.englishWord = 'Hello'
-		word.gaelicWord = 'Halo'
+		word.gaelicWord = 'Halò'
 		word.pronunciation = 'pronounce'
 		word.plural = 'plural'
 		word.put()
 
-		word = Word()
+		word = Word(id='Welcome')
 		word.englishWord = 'Welcome'
-		word.gaelicWord = 'Faite'
+		word.gaelicWord = 'Ceud mìle fàilte'
 		word.pronunciation = 'pronounce'
 		word.plural = 'plural'
 		word.put()
