@@ -196,8 +196,8 @@ class LoadWord(webapp2.RequestHandler):
 		self.response.write("OK")
 
 class MainHandler(webapp2.RequestHandler):
-    def get(self):
-        self.response.write("home page")
+	def get(self):
+		self.response.write("home page")
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
