@@ -17,10 +17,8 @@
 import webapp2
 from google.appengine.ext import ndb
 from webapp2_extras import json
-import codecs
 
 import logging
-import urllib
 
 class Word(ndb.Model):
 	englishWord = ndb.StringProperty()
@@ -201,8 +199,7 @@ class LoadWord(webapp2.RequestHandler):
 
 class MainHandler(webapp2.RequestHandler):
 	def get(self):
-		page = urllib.urlopen("Client/index.html").read()
-		self.response.write(page)
+		self.response.write("Home page")
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
