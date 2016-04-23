@@ -3,7 +3,8 @@ var score = 0;
 var answered = 0;
 
 /*globals $, popupConfirm, popupAlert, userEmail URL */
-var URL = "http://gaelic-1281.appspot.com/";
+//var URL = "http://gaelic-1281.appspot.com/";
+var URL = "http://localhost:8080/";
 
 $(document).ready(function(){
     $( "#loginForm" ).submit(function( event ) {

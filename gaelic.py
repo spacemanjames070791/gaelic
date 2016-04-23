@@ -44,6 +44,7 @@ class Word(ndb.Model):
 
 	def toJSON(self):
 		jsonword = {
+			"wordID" : self.key.id(),
 			"englishWord": self.englishWord,
 			"gaelicWord": self.gaelicWord,
 			"pronunciation": self.pronunciation,
@@ -77,6 +78,7 @@ class Question(ndb.Model):
 		return json.encode(jsonquestion)
 
 class User(ndb.Model):
+	email = ndb.StringProperty(required = True)
 	name = ndb.StringProperty(required=True)
 	password = ndb.StringProperty()
 
@@ -84,7 +86,7 @@ class User(ndb.Model):
 		jsonuser = {
 			"email" : self.key.id(),
 			"name": self.name,
-			"password": self.name,
+			"password": self.password,
 		}
 		return json.encode(jsonuser)
 
@@ -93,30 +95,26 @@ class NewUser(webapp2.RequestHandler):
 		email = self.request.get('email')
 		name = self.request.get('name')
 		password = self.request.get('password')
-		callback = self.request.get('callback')
 		usr = User(id=email)
+		usr.email = email
 		usr.name = name
 		usr.password = password
 		usr.put()
 
 class Login(webapp2.RequestHandler):
-	def get(self):
-		cust = User.get_by_id(self.request.get('name'))
-		callback = (self.request.get('callback'))
-
-		p=""
-		username=self.request.get('name')
-		user = User.query()
-		user = user.filter(User.name==username)
-		for usr in user:
-			p+=usr.toJSON()
-
-		p = p[:-1]
-
-		response = callback + '({"user":"'+cust.key.id()+\
-				   '","credentials":[{"name":"' + str(cust.name) + '","password":"' + str(cust.password) + '"}]})'
-
-		self.response.write(response)
+	def get(self, email):
+		jsonresponse = ''
+		callback = self.request.get('callback')
+		users = User.query()
+		users = users.filter(User.email==email)
+		# Now build a response of JSON messages..
+		for usr in users:
+			jsonresponse += usr.toJSON() + ','
+		# and add in the callback function if required...
+		if(callback == ''):
+			self.response.write('[' + jsonresponse[:-1] + ']')
+		else:
+			self.response.write(callback + '([' + jsonresponse[:-1] + ']);')
 
 class LoadQuestions(webapp2.RequestHandler):
 
@@ -194,20 +192,35 @@ class TranslateWord(webapp2.RequestHandler):
 class LoadWord(webapp2.RequestHandler):
 
 	def get(self):
-		word = Word(id='Hello')
-		word.englishWord = 'Hello'
-		word.gaelicWord = 'Halò'
-		word.pronunciation = 'pronounce'
-		word.plural = 'plural'
-		word.put()
+		englishWord = 'Hello'
+		# word = Word(id=englishWord)
+		# word.englishWord = 'Hello'
+		# word.gaelicWord = 'Halo'
+		# word.pronunciation = 'pronounce'
+		# word.plural = 'plural'
+		# word.put()
+        #
+		#
+		# englishWord = 'Welcome'
+		# word = Word(id=englishWord)
+		# word = Word()
+		# word.englishWord = 'Welcome'
+		# word.gaelicWord = 'Faite'
+		# word.pronunciation = 'pronounce'
+		# word.plural = 'plural'
+		# word.put()
+		# self.response.write("OK")
 
-		word = Word(id='Welcome')
-		word.englishWord = 'Welcome'
-		word.gaelicWord = 'Ceud mìle fàilte'
-		word.pronunciation = 'pronounce'
-		word.plural = 'plural'
+		word = WordStore('Welcome','Faite','pronuciation','plural')
+
+class WordStore(ndb.Model):
+	def get(self, englishWord, gaelicWord, pronunciation, plural):
+		word = Word(id=englishWord)
+		word.englishWord = englishWord
+		word.gaelicWord = gaelicWord
+		word.pronunciation = pronunciation
+		word.plural = plural
 		word.put()
-		self.response.write("OK")
 
 class MainHandler(webapp2.RequestHandler):
 	def get(self):
@@ -218,5 +231,7 @@ app = webapp2.WSGIApplication([
     ('/load', LoadQuestions),
 	('/loadword', LoadWord),
 	('/translateWord/(.*)', TranslateWord),
-	('/users/(.*)', QuestionHandler)
+	('/users/(.*)', QuestionHandler),
+	('/register', NewUser),
+	('/login/(.*)', Login)
 ], debug=True)
