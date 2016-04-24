@@ -109,7 +109,7 @@ function doGet() {
 function doLoginProcess() {
     $.ajax({
         type: "GET",
-        url: URL + "login/" + $("#useremail").val(),
+        url: URL + "login/" + $("#useremail").val() + "/" + $("#userpassword").val(),
         async: true,
         contentType: "application/javascript",
         dataType: 'jsonp',
@@ -125,30 +125,12 @@ function doLoginProcess() {
 
 function checkCredentials(json){
     for(index=0;index<json.length; index++){
-        alert((json[0].password));
     }
     if ($("#userpassword").val()==json[0].password){
         alert("Login successful");
     }else{
         alert("Login failed");
     }
-}
-
-function updateLogin() {
-    $.ajax({
-        type: "GET",
-        url: URL + "online/" + $("#useremail").val(),
-        async: true,
-        contentType: "application/javascript",
-        dataType: 'jsonp',
-        success: function (json) {
-            checkCredentials(json);
-        },
-        error: function (e) {
-            popupConfirm("Error", e.message);
-            alert("failure");
-        }
-    });
 }
 
 function handleJsonResponse(json) {
