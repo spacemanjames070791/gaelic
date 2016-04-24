@@ -78,15 +78,17 @@ class Question(ndb.Model):
 		return json.encode(jsonquestion)
 
 class User(ndb.Model):
-	email = ndb.StringProperty(required = True)
+	useremail = ndb.StringProperty(required = True)
 	name = ndb.StringProperty(required=True)
 	password = ndb.StringProperty()
+	isOnline = ndb.BooleanProperty()
 
 	def toJSON(self):
 		jsonuser = {
-			"email" : self.key.id(),
+			"useremail" : self.useremail,
 			"name": self.name,
 			"password": self.password,
+			"isOnline": self.isOnline
 		}
 		return json.encode(jsonuser)
 
@@ -95,18 +97,20 @@ class NewUser(webapp2.RequestHandler):
 		email = self.request.get('email')
 		name = self.request.get('name')
 		password = self.request.get('password')
+		isOnline = self.request.get('isOnline')
 		usr = User(id=email)
 		usr.email = email
 		usr.name = name
 		usr.password = password
+		usr.isOnline = False
 		usr.put()
 
 class Login(webapp2.RequestHandler):
-	def get(self, email):
+	def get(self, email, password):
 		jsonresponse = ''
 		callback = self.request.get('callback')
 		users = User.query()
-		users = users.filter(User.email==email)
+		users = users.filter(User.useremail==email)
 		# Now build a response of JSON messages..
 		for usr in users:
 			jsonresponse += usr.toJSON() + ','
@@ -116,10 +120,32 @@ class Login(webapp2.RequestHandler):
 		else:
 			self.response.write(callback + '([' + jsonresponse[:-1] + ']);')
 
+		for usr in users:
+			if(password==usr.password):
+				usr.isOnline = True
+				usr.put()
+
 class LoadQuestions(webapp2.RequestHandler):
 
 	def get(self):
-		msg = Question()
+		useremail = 'neil@mars.com'
+		user = User(id=useremail)
+		user.useremail = useremail
+		user.name = 'Neil'
+		user.password = 'nimbus'
+		user.isOnline = False
+		user.put()
+
+		useremail = 'jamie@spacestation.com'
+		user = User(id=useremail)
+		user.useremail = useremail
+		user.name = 'Jamie'
+		user.password = 'crazyfrog'
+		user.isOnline = False
+		user.put()
+
+		question = 'What is the word for cold?'
+		msg = Question(id=question)
 		msg.user = 'neil@bedrock.com'
 		msg.message = 'What is the word for cold?'
 		msg.opt1 = 'fuar'
@@ -129,7 +155,8 @@ class LoadQuestions(webapp2.RequestHandler):
 		msg.answer = 'fuar'
 		msg.put()
 
-		msg = Question()
+		question = 'What is the word for Butter?'
+		msg = Question(id=question)
 		msg.user = 'neil@bedrock.com'
 		msg.message = 'What is the word for Butter?'
 		msg.opt1 = 'an t-aran'
@@ -139,7 +166,8 @@ class LoadQuestions(webapp2.RequestHandler):
 		msg.answer = 'an t-im'
 		msg.put()
 
-		msg = Question()
+		question = 'What is the correct grammar for "I am going to be happy"?'
+		msg = Question(id=question)
 		msg.user = 'neil@bedrock.com'
 		msg.message = 'What is the correct grammar for "I am going to be happy"'
 		msg.opt1 = 'Bi toilichte!'
@@ -148,6 +176,22 @@ class LoadQuestions(webapp2.RequestHandler):
 		msg.opt4 = 'Tha mi gu bhith toilichte'
 		msg.answer = 'Tha mi gu bhith toilichte'
 		msg.put()
+
+		englishWord = 'Hello'
+		word = Word(id=englishWord)
+		word.englishWord = 'Hello'
+		word.gaelicWord = 'Halo'
+		word.pronunciation = 'pronounce'
+		word.plural = 'plural'
+		word.put()
+
+		englishWord = 'Welcome'
+		word = Word(id=englishWord)
+		word.englishWord = 'Welcome'
+		word.gaelicWord = 'Faite'
+		word.pronunciation = 'pronounce'
+		word.plural = 'plural'
+		word.put()
 		self.response.write("OK")
 
 class QuestionHandler(webapp2.RequestHandler):
@@ -189,26 +233,6 @@ class TranslateWord(webapp2.RequestHandler):
 		else:
 			self.response.write(callback + '([' + jsonresponse[:-1] + ']);')
 
-class LoadWord(webapp2.RequestHandler):
-
-	def get(self):
-		englishWord = 'Hello'
-		word = Word(id=englishWord)
-		word.englishWord = 'Hello'
-		word.gaelicWord = 'Halo'
-		word.pronunciation = 'pronounce'
-		word.plural = 'plural'
-		word.put()
-
-		englishWord = 'Welcome'
-		word = Word(id=englishWord)
-		word.englishWord = 'Welcome'
-		word.gaelicWord = 'Faite'
-		word.pronunciation = 'pronounce'
-		word.plural = 'plural'
-		word.put()
-		self.response.write("OK")
-
 class MainHandler(webapp2.RequestHandler):
 	def get(self):
 		self.response.write(link)
@@ -216,9 +240,8 @@ class MainHandler(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/load', LoadQuestions),
-	('/loadword', LoadWord),
 	('/translateWord/(.*)', TranslateWord),
 	('/users/(.*)', QuestionHandler),
 	('/register', NewUser),
-	('/login/(.*)', Login)
+	('/login/(.*)/(.*)', Login)
 ], debug=True)

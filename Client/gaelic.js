@@ -8,7 +8,7 @@ var URL = "http://localhost:8080/";
 
 $(document).ready(function(){
     $( "#loginForm" ).submit(function( event ) {
-        doLogin();
+        doLoginProcess();
     });
     $("#addPurchase").click(function(){
         getPurchaseData();
@@ -98,6 +98,51 @@ function doGet() {
         success: function (json) {
             handleJsonResponse(json);
 
+        },
+        error: function (e) {
+            popupConfirm("Error", e.message);
+            alert("failure");
+        }
+    });
+}
+
+function doLoginProcess() {
+    $.ajax({
+        type: "GET",
+        url: URL + "login/" + $("#useremail").val(),
+        async: true,
+        contentType: "application/javascript",
+        dataType: 'jsonp',
+        success: function (json) {
+            checkCredentials(json);
+        },
+        error: function (e) {
+            popupConfirm("Error", e.message);
+            alert("failure");
+        }
+    });
+}
+
+function checkCredentials(json){
+    for(index=0;index<json.length; index++){
+        alert((json[0].password));
+    }
+    if ($("#userpassword").val()==json[0].password){
+        alert("Login successful");
+    }else{
+        alert("Login failed");
+    }
+}
+
+function updateLogin() {
+    $.ajax({
+        type: "GET",
+        url: URL + "online/" + $("#useremail").val(),
+        async: true,
+        contentType: "application/javascript",
+        dataType: 'jsonp',
+        success: function (json) {
+            checkCredentials(json);
         },
         error: function (e) {
             popupConfirm("Error", e.message);
