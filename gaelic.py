@@ -193,34 +193,21 @@ class LoadWord(webapp2.RequestHandler):
 
 	def get(self):
 		englishWord = 'Hello'
-		# word = Word(id=englishWord)
-		# word.englishWord = 'Hello'
-		# word.gaelicWord = 'Halo'
-		# word.pronunciation = 'pronounce'
-		# word.plural = 'plural'
-		# word.put()
-        #
-		#
-		# englishWord = 'Welcome'
-		# word = Word(id=englishWord)
-		# word = Word()
-		# word.englishWord = 'Welcome'
-		# word.gaelicWord = 'Faite'
-		# word.pronunciation = 'pronounce'
-		# word.plural = 'plural'
-		# word.put()
-		# self.response.write("OK")
-
-		word = WordStore('Welcome','Faite','pronuciation','plural')
-
-class WordStore(ndb.Model):
-	def get(self, englishWord, gaelicWord, pronunciation, plural):
 		word = Word(id=englishWord)
-		word.englishWord = englishWord
-		word.gaelicWord = gaelicWord
-		word.pronunciation = pronunciation
-		word.plural = plural
+		word.englishWord = 'Hello'
+		word.gaelicWord = 'Halo'
+		word.pronunciation = 'pronounce'
+		word.plural = 'plural'
 		word.put()
+
+		englishWord = 'Welcome'
+		word = Word(id=englishWord)
+		word.englishWord = 'Welcome'
+		word.gaelicWord = 'Faite'
+		word.pronunciation = 'pronounce'
+		word.plural = 'plural'
+		word.put()
+		self.response.write("OK")
 
 class MainHandler(webapp2.RequestHandler):
 	def get(self):
