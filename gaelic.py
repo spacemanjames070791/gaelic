@@ -23,9 +23,14 @@ import codecs
 
 import logging
 
+link = """
 <html><head><title>Gaelic App</title></head>
-<body onload="html/index.html">
+<body>
+	<h1>Gaelic Translation Services</h1>
+
+	<a href="html/index.html">Go to app main page</a>
 </body>
+"""
 
 class Word(ndb.Model):
 	englishWord = ndb.StringProperty()
