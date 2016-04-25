@@ -8,6 +8,36 @@
     <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
     <script src="gaelic.js"></script>
+    
+    <script>
+    toggleFullScreen(true);
+
+    function toggleFullScreen() {
+     if (!document.fullscreenElement &&    // alternative standard method
+        !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {  // current working methods
+     if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+     } else if (document.documentElement.msRequestFullscreen) {
+        document.documentElement.msRequestFullscreen();
+     } else if (document.documentElement.mozRequestFullScreen) {
+        document.documentElement.mozRequestFullScreen();
+     } else if (document.documentElement.webkitRequestFullscreen) {
+        document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+     }
+     } else {
+     if (document.exitFullscreen) {
+        document.exitFullscreen();
+     } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+     } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+     } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+     }
+     }
+     }
+    </script>
+    
 </head>
 <body>
 <div id="home" data-role="page">
