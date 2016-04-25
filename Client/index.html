@@ -8,6 +8,7 @@
     <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
     <script src="gaelic.js"></script>
+    <script src="login.js"></script>
     
     <script>
     toggleFullScreen(true);
@@ -51,7 +52,6 @@
 
         <ul data-role="listview" data-inset="true">
             <li><a id="translate" href="#translatePage">Singluar Word Translation</a></li>
-            <li><a id="aToZSearch" href="#searchPage">A-Z Search</a></li>
             <li><a id="lessons" href="#lessonPage">Lessons</a></li>
             <li><a id="settings" href="#settingsPage">Settings</a></li>
         </ul>
@@ -90,24 +90,6 @@
     </div>
 </div>
 
-<div id="searchPage" data-role="page">
-    <div data-role="header">
-        <h1>A To Z Search</h1>
-        <a href="#" data-rel="back" data-icon="back">Back</a>
-<!--        <li><a id="SignIn" href="#logout">Sign in</a></li>
-        <li><a id="Register" href="#logout">Logout</a></li> -->
-    </div>
-    <div data-role="content">
-        <input id="searchWord" type="text" value="Enter word to search"/>
-        <button class="btn">Search</button>
-        <textarea name="lessonField" id="lessonField" cols="30" rows="40"></textarea>
-    </div>
-    <div data-role="footer" data-position="fixed" class="ui-bar">
-        <nav>
-        </nav>
-    </div>
-</div>
-
 <div id="lessonPage" data-role="page">
     <div data-role="header">
         <h1></h1>
@@ -131,8 +113,6 @@
     <div data-role="header">
         <h1></h1>
         <a href="#" data-rel="back" data-icon="back">Back</a>
-<!--        <li><a id="SignIn" href="#logout">Sign in</a></li>
-        <li><a id="Register" href="#logout">Logout</a></li> -->
     </div>
     <div data-role="content">
         <ul id="questions" data-role="listview" data-inset="true">

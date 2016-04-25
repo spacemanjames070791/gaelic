@@ -7,13 +7,6 @@ var URL = "http://gaelic-1281.appspot.com/";
 //var URL = "http://localhost:8080/";
 
 $(document).ready(function(){
-    $( "#loginForm" ).submit(function( event ) {
-        doLoginProcess();
-    });
-    $("#addPurchase").click(function(){
-        getPurchaseData();
-
-    });
     $("#translateWord").on('click', doTranslate);
     $("#grammar").on('click',doGet);
     $("#next").on('click', upQuestion);
@@ -21,21 +14,6 @@ $(document).ready(function(){
     $("#login").on('click', goLogin);
     $("#cancel").on('click', goHome);
 });
-
-function goLogin(){
-    alert("Login");
-    var user = $("#useremail").val(), pwd = $("#userpassword").val();
-    localStorage.setItem("user", {user: user, password: pwd});
-    goHome();
-}
-
-function goHome() {
-    $.mobile.changePage("#home");
-}
-
-function checkLogin() {
-    return localStorage.login != null;
-}
 
 function answerBox() {
     answered++;
@@ -106,51 +84,6 @@ function doGet() {
     });
 }
 
-function doLoginProcess() {
-    $.ajax({
-        type: "GET",
-        url: URL + "login/" + $("#useremail").val(),
-        async: true,
-        contentType: "application/javascript",
-        dataType: 'jsonp',
-        success: function (json) {
-            checkCredentials(json);
-        },
-        error: function (e) {
-            popupConfirm("Error", e.message);
-            alert("failure");
-        }
-    });
-}
-
-function checkCredentials(json){
-    for(index=0;index<json.length; index++){
-        alert((json[0].password));
-    }
-    if ($("#userpassword").val()==json[0].password){
-        alert("Login successful");
-    }else{
-        alert("Login failed");
-    }
-}
-
-function updateLogin() {
-    $.ajax({
-        type: "GET",
-        url: URL + "online/" + $("#useremail").val(),
-        async: true,
-        contentType: "application/javascript",
-        dataType: 'jsonp',
-        success: function (json) {
-            checkCredentials(json);
-        },
-        error: function (e) {
-            popupConfirm("Error", e.message);
-            alert("failure");
-        }
-    });
-}
-
 function handleJsonResponse(json) {
     var index, html = "";
     //for(index=json.length-1; index>=0; index--){
@@ -180,22 +113,4 @@ function formatMessage(ques) {
     html += "</div></li>";
     return html;
 
-}
-
-function doLogin() {
-    alert("notLoggedIn");
-    var notLoggedIn = true;
-    if(!checkLogin()) {
-        popupLogin(function okFunc(){
-            var result = getLoginValues();
-            localStorage.setItem("login", result);
-            notLoggedIn = false;
-        }, function cancelFunc(){
-            notLoggedIn = true;
-        });
-    }
-
-    if(notLoggedIn) {
-        popupAlert("You need to be logged in!");
-    }
 }

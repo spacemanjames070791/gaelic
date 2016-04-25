@@ -233,6 +233,7 @@ class TranslateWord(webapp2.RequestHandler):
 		else:
 			self.response.write(callback + '([' + jsonresponse[:-1] + ']);')
 
+
 class MainHandler(webapp2.RequestHandler):
 	def get(self):
 		self.response.write(link)
