@@ -9,37 +9,8 @@
     <script src="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
     <script src="gaelic.js"></script>
     <script src="login.js"></script>
-    
-    <script>
-    toggleFullScreen(true);
-
-    function toggleFullScreen() {
-     if (!document.fullscreenElement &&    // alternative standard method
-        !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {  // current working methods
-     if (document.documentElement.requestFullscreen) {
-        document.documentElement.requestFullscreen();
-     } else if (document.documentElement.msRequestFullscreen) {
-        document.documentElement.msRequestFullscreen();
-     } else if (document.documentElement.mozRequestFullScreen) {
-        document.documentElement.mozRequestFullScreen();
-     } else if (document.documentElement.webkitRequestFullscreen) {
-        document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
-     }
-     } else {
-     if (document.exitFullscreen) {
-        document.exitFullscreen();
-     } else if (document.msExitFullscreen) {
-        document.msExitFullscreen();
-     } else if (document.mozCancelFullScreen) {
-        document.mozCancelFullScreen();
-     } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen();
-     }
-     }
-     }
-    </script>
-    
 </head>
+
 <body>
 <div id="home" data-role="page">
     <div data-role="header">
@@ -70,7 +41,7 @@
     <div data-role="content">
         <select>
             <option value="translate1">English - Gaelic</option>
-            <option value="translate2">Gaelic - English</option>
+
         </select>
         <label for="singleWord"></label>
         <input id="singleWord" type="text"/>

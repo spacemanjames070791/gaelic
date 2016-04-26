@@ -24,7 +24,7 @@ import codecs
 import logging
 
 link = """
-<html><head><title>auws-msgboard Demo App</title></head>
+<html><head><title>Gaelic App</title></head>
 <body>
 	<h1>Gaelic Translation Services</h1>
 
