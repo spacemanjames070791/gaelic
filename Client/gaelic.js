@@ -9,7 +9,7 @@ localStorage.setItem("loggedin", 0);
 
 $(document).ready(function(){
     $("#translateWord").on('click', doTranslate);
-    $("#grammar").on('click',doGet);
+    $("#quiz").on('click',doGet);
     $("#next").on('click', upQuestion);
     $("#previous").on('click', upQuestion);
     $("#login").on('click', goLogin);
@@ -69,7 +69,7 @@ function doTranslate() {
 
 function doGet() {
     //if(localStorage.loggedin==1) {
-        $.mobile.changePage("#home");
+        $.mobile.changePage("#quizpage");
         $.ajax({
             type: "GET",
             url: URL + "users/neil@bedrock.com",
