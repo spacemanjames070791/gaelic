@@ -3,8 +3,9 @@ var score = 0;
 var answered = 0;
 
 /*globals $, popupConfirm, popupAlert, userEmail URL */
-var URL = "http://gaelic-1281.appspot.com/";
-//var URL = "http://localhost:8080/";
+//var URL = "http://gaelic-1281.appspot.com/";
+var URL = "http://localhost:8080/";
+localStorage.setItem("loggedin", 0);
 
 $(document).ready(function(){
     $("#translateWord").on('click', doTranslate);
@@ -67,21 +68,26 @@ function doTranslate() {
 }
 
 function doGet() {
-    $.ajax({
-        type: "GET",
-        url: URL + "users/neil@bedrock.com",
-        async: true,
-        contentType: "application/javascript",
-        dataType: 'jsonp',
-        success: function (json) {
-            handleJsonResponse(json);
+    //if(localStorage.loggedin==1) {
+        $.mobile.changePage("#home");
+        $.ajax({
+            type: "GET",
+            url: URL + "users/neil@bedrock.com",
+            async: true,
+            contentType: "application/javascript",
+            dataType: 'jsonp',
+            success: function (json) {
+                handleJsonResponse(json);
 
-        },
-        error: function (e) {
-            popupConfirm("Error", e.message);
-            alert("failure");
-        }
-    });
+            },
+            error: function (e) {
+                popupConfirm("Error", e.message);
+                alert("failure");
+            }
+        });
+    //}
+    //else
+        //alert("You need to login to use the quiz section");
 }
 
 function handleJsonResponse(json) {

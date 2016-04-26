@@ -1,16 +1,37 @@
 /**
  * Created by Neil on 25/04/2016.
  */
-var URL = "http://gaelic-1281.appspot.com/";
-//var URL = "http://localhost:8080/";
+//var URL = "http://gaelic-1281.appspot.com/";
+var URL = "http://localhost:8080/";
 
 $(document).ready(function(){
     $( "#loginForm" ).submit(function( event ) {
         doLoginProcess();
     });
+    $( "#registerForm" ).submit(function( event ) {
+        doRegister();
+    });
     $("#login").on('click', goLogin);
     $("#cancel").on('click', goHome);
 });
+
+function doRegister(){
+    $.ajax({
+        type: "GET",
+        url: URL + "register?email=" + $("#registeremail").val() + "&username=" + $("#firstname").val() + "&password="
+        + $("#registerpassword").val(),
+        async: true,
+        contentType: "application/javascript",
+        dataType: 'jsonp',
+        success: function (json) {
+            alert("added user");
+        },
+        error: function (e) {
+            popupConfirm("Error", e.message);
+            alert("failure");
+        }
+    });
+}
 
 function doLoginProcess() {
     $.ajax({
@@ -20,7 +41,7 @@ function doLoginProcess() {
         contentType: "application/javascript",
         dataType: 'jsonp',
         success: function (json) {
-            checkCredentials(json);
+            checkCredential(json);
 
         },
         error: function (e) {
@@ -45,11 +66,12 @@ function checkLogin() {
     return localStorage.login != null;
 }
 
-function checkCredentials(json){
+function checkCredential(json){
     for(index=0;index<json.length; index++){
     }
     if ($("#userpassword").val()==json[0].password){
         alert("Login successful");
+        localStorage.loggedin = 1;
     }else{
         alert("Login failed");
     }

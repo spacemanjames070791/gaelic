@@ -43,10 +43,9 @@
 <body>
 <div id="home" data-role="page">
     <div data-role="header">
-        <h2 id="date">Date</h2>
-        <h2 id="time">Time</h2>
-        <a id="signin" data-role="button" href="#loginPage">Sign in</a>
-        <a id="register" data-role="button" href="#logout">Logout</a>
+        <h2 id="user"></h2>
+        <a id="signin" data-role="button" href="#loginPage">Sign In</a>
+        <a id="register" data-role="button" href="#registerPage"></a>
     </div>
     <div data-role="content">
 
@@ -66,8 +65,7 @@
     <div data-role="header">
         <h1>Translate</h1>
         <a href="#" data-rel="back" data-icon="back">Back</a>
-<!--        <li><a id="SignIn" href="#">Sign in</a></li>
-        <li><a id="Register" href="#logout">Logout</a></li> -->
+        <h2 id="currentuser"></h2>
     </div>
     <div data-role="content">
         <select>
@@ -100,7 +98,7 @@
     <div data-role="content">
         <ul data-role="listview" data-inset="true">
             <li><a id="sentenceStructire" href="#lessonResult">Sentence Structure</a></li>
-            <li><a id="grammar" href="#grammarpage">Grammar</a></li>
+            <li><a id="grammar" href="#">Grammar</a></li>
         </ul>
     </div>
     <div data-role="footer" data-position="fixed" class="ui-bar">
@@ -160,6 +158,27 @@
             <label for="userpassword">Password:</label>
             <input type="password" id="userpassword" size="20"/>
             <button data-role="button" id="ok">Log-In</button><button data-role="button" id="cancel">Cancel</button>
+        </form>
+    </div>
+    <div data-role="footer" data-position="fixed" class="ui-bar">
+        <nav>
+        </nav>
+    </div>
+</div>
+<div id="registerPage" data-role="page">
+    <div data-role="header">
+        <h1>Register</h1>
+        <a href="#" data-rel="back" data-icon="back">Back</a>
+    </div>
+    <div data-role="content">
+        <form id="registerForm">
+            <label for="firstname">First Name:</label>
+            <input type="text" id="firstname" size="30" placeholder="Joe"/>
+            <label for="registeremail">Email:</label>
+            <input type="text" id="registeremail" size="30" placeholder="example@email.com"/>
+            <label for="registerpassword">Password:</label>
+            <input type="password" id="registerpassword" size="20"/>
+            <button data-role="button" id="regok">Register</button><button data-role="button" id="regcancel">Cancel</button>
         </form>
     </div>
     <div data-role="footer" data-position="fixed" class="ui-bar">

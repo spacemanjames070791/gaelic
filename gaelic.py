@@ -79,14 +79,14 @@ class Question(ndb.Model):
 
 class User(ndb.Model):
 	useremail = ndb.StringProperty(required = True)
-	name = ndb.StringProperty(required=True)
+	username = ndb.StringProperty(required=True)
 	password = ndb.StringProperty()
 	isOnline = ndb.BooleanProperty()
 
 	def toJSON(self):
 		jsonuser = {
 			"useremail" : self.useremail,
-			"name": self.name,
+			"username": self.username,
 			"password": self.password,
 			"isOnline": self.isOnline
 		}
@@ -95,15 +95,16 @@ class User(ndb.Model):
 class NewUser(webapp2.RequestHandler):
 	def get(self):
 		email = self.request.get('email')
-		name = self.request.get('name')
+		username = self.request.get('username')
 		password = self.request.get('password')
-		isOnline = self.request.get('isOnline')
+		callback = self.request.get('callback')
 		usr = User(id=email)
-		usr.email = email
-		usr.name = name
+		usr.useremail = email
+		usr.username = username
 		usr.password = password
 		usr.isOnline = False
 		usr.put()
+		self.response.write("User added")
 
 class Login(webapp2.RequestHandler):
 	def get(self, email, password):
@@ -114,7 +115,7 @@ class Login(webapp2.RequestHandler):
 		# Now build a response of JSON messages..
 		for usr in users:
 			jsonresponse += usr.toJSON() + ','
-		# and add in the callback function if required...
+		#ßand add in the callback function if required...
 		if(callback == ''):
 			self.response.write('[' + jsonresponse[:-1] + ']')
 		else:
@@ -131,7 +132,7 @@ class LoadQuestions(webapp2.RequestHandler):
 		useremail = 'neil@mars.com'
 		user = User(id=useremail)
 		user.useremail = useremail
-		user.name = 'Neil'
+		user.username = 'Neil'
 		user.password = 'nimbus'
 		user.isOnline = False
 		user.put()
@@ -139,7 +140,7 @@ class LoadQuestions(webapp2.RequestHandler):
 		useremail = 'jamie@spacestation.com'
 		user = User(id=useremail)
 		user.useremail = useremail
-		user.name = 'Jamie'
+		user.username = 'Jamie'
 		user.password = 'crazyfrog'
 		user.isOnline = False
 		user.put()
