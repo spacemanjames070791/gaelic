@@ -9,22 +9,25 @@
     <script src="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
     <script src="gaelic.js"></script>
     <script src="login.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+    <script src="geocode.js"></script>
 </head>
 
 <body>
 <div id="home" data-role="page">
     <div data-role="header">
         <h2 id="user"></h2>
+        <h5 id="postcode"></h5>
         <a id="signin" data-role="button" href="#loginPage">Sign In</a>
         <a id="register" data-role="button" href="#registerPage"></a>
     </div>
     <div data-role="content">
-
         <ul data-role="listview" data-inset="true">
             <li><a id="translate" href="#translatePage">Singluar Word Translation</a></li>
             <li><a id="lessons" href="#lessonPage">Lessons</a></li>
             <li><a id="settings" href="#settingsPage">Settings</a></li>
         </ul>
+        <div id="map-canvas"></div>
     </div>
     <div data-role="footer" data-position="fixed" class="ui-bar">
         <nav>
@@ -36,7 +39,6 @@
     <div data-role="header">
         <h1>Translate</h1>
         <a href="#" data-rel="back" data-icon="back">Back</a>
-        <h2 id="currentuser"></h2>
     </div>
     <div data-role="content">
         <select>
@@ -61,10 +63,8 @@
 
 <div id="lessonPage" data-role="page">
     <div data-role="header">
-        <h1></h1>
+
         <a href="#" data-rel="back" data-icon="back">Back</a>
-<!--        <li><a id="SignIn" href="#logout">Sign in</a></li>
-        <li><a id="Register" href="#logout">Logout</a></li> -->
     </div>
     <div data-role="content">
         <ul data-role="listview" data-inset="true">
@@ -80,7 +80,7 @@
 
 <div id="quizpage" data-role="page">
     <div data-role="header">
-        <h1></h1>
+        <h2 id="currentUser">User</h2>
         <a href="#" data-rel="back" data-icon="back">Back</a>
     </div>
     <div data-role="content">

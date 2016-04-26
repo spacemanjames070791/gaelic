@@ -5,9 +5,16 @@ var answered = 0;
 /*globals $, popupConfirm, popupAlert, userEmail URL */
 //var URL = "http://gaelic-1281.appspot.com/";
 var URL = "http://localhost:8080/";
-localStorage.setItem("loggedin", 0);
+localStorage.setItem("loggedin", 1);
+localStorage.setItem("currentuser", "Neil");
 
 $(document).ready(function(){
+
+    if(localStorage.loggedin==1)
+        $("#signin").text("Logout");
+    if(!!navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(handlePosition);
+        }
     $("#translateWord").on('click', doTranslate);
     $("#quiz").on('click',doGet);
     $("#next").on('click', upQuestion);
@@ -70,6 +77,7 @@ function doTranslate() {
 function doGet() {
     //if(localStorage.loggedin==1) {
         $.mobile.changePage("#quizpage");
+        $("#currentUser").text(localStorage.currentuser);
         $.ajax({
             type: "GET",
             url: URL + "users/neil@bedrock.com",

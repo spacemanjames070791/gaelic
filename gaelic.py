@@ -92,6 +92,17 @@ class User(ndb.Model):
 		}
 		return json.encode(jsonuser)
 
+class Town(ndb.Model):
+	townName = ndb.StringProperty(required = True)
+	gaelic = ndb.StringProperty(required=True)
+
+	def toJSON(self):
+		jsontown = {
+			"townName" : self.townName,
+			"gaelic": self.gaelic
+		}
+		return json.encode(jsontown)
+
 class NewUser(webapp2.RequestHandler):
 	def get(self):
 		email = self.request.get('email')
@@ -121,10 +132,20 @@ class Login(webapp2.RequestHandler):
 		else:
 			self.response.write(callback + '([' + jsonresponse[:-1] + ']);')
 
-		for usr in users:
-			if(password==usr.password):
-				usr.isOnline = True
-				usr.put()
+class Location(webapp2.RequestHandler):
+	def get(self, townName):
+		jsonresponse = ''
+		callback = self.request.get('callback')
+		town = Town.query()
+		town = town.filter(Town.townName==townName)
+		# Now build a response of JSON messages..
+		for tn in town:
+			jsonresponse += tn.toJSON() + ','
+		#ßand add in the callback function if required...
+		if(callback == ''):
+			self.response.write('[' + jsonresponse[:-1] + ']')
+		else:
+			self.response.write(callback + '([' + jsonresponse[:-1] + ']);')
 
 class LoadQuestions(webapp2.RequestHandler):
 
@@ -193,6 +214,13 @@ class LoadQuestions(webapp2.RequestHandler):
 		word.pronunciation = 'pronounce'
 		word.plural = 'plural'
 		word.put()
+
+		townName = 'Glasgow'
+		town = Town(id=townName)
+		town.townName = townName
+		town.gaelic = 'Ghlaschu'
+		town.put()
+
 		self.response.write("OK")
 
 class QuestionHandler(webapp2.RequestHandler):
@@ -245,5 +273,6 @@ app = webapp2.WSGIApplication([
 	('/translateWord/(.*)', TranslateWord),
 	('/users/(.*)', QuestionHandler),
 	('/register', NewUser),
-	('/login/(.*)/(.*)', Login)
+	('/login/(.*)/(.*)', Login),
+	('/location/(.*)', Location)
 ], debug=True)
