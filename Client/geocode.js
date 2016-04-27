@@ -34,7 +34,7 @@ function doLocation(loc) {
 }
 
 function updateLoc(json){
-    for(index=0; index<json.length; index++){
+    for (index = 0; index < json.length; index++) {
         $("#postcode").text(json[0].townName + ' - ' + json[0].gaelic);
     }
 }
@@ -58,7 +58,7 @@ function doGeoCode(latlng) {
                 });
                 var location = results[0].address_components[2].long_name;
                 doLocation(location);
-                //$("#postcode").text("Postcode: " + results[0].address_components[2].long_name)
+                $("#postcode").text(location);
 
             } else {
                 alert('No results found');
@@ -71,8 +71,8 @@ function doGeoCode(latlng) {
 
 function codeLatLng(coords) {
     var latlngStr = coords.latitude + ',' + coords.longitude,
-        lat = 55.8642,
-        lng = -4.2518,
+        lat = coords.latitude,
+        lng = coords.longitude,
         latlng = new google.maps.LatLng(lat, lng),
 
         mapOptions = {

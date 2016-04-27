@@ -101,7 +101,7 @@ class Town(ndb.Model):
 		return json.encode(jsontown)
 
 class NewUser(webapp2.RequestHandler):
-	def get(self):
+	def post(self):
 		email = self.request.get('email')
 		username = self.request.get('username')
 		password = self.request.get('password')
@@ -250,9 +250,21 @@ class MainHandler(webapp2.RequestHandler):
 	def get(self):
 		self.response.write(link)
 
+class Testpost(webapp2.RequestHandler):
+	def post(self, english):
+		englishWord = 'Hello'
+		word = Word(id=englishWord)
+		word.englishWord = 'Hello'
+		word.gaelicWord = self.request.get('gaelicWord')
+		word.pronunciation = 'pronounce'
+		word.plural = 'plural'
+		word.put()
+		self.response.write(word.toJSON())
+
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/load', LoadQuestions),
+	('/test/(.*)', Testpost),
 	('/translateWord/(.*)', TranslateWord),
 	('/questions', QuestionHandler),
 	('/register', NewUser),

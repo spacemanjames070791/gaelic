@@ -19,7 +19,7 @@
         <h2 id="user"></h2>
         <h5 id="postcode"></h5>
         <a id="signin" data-role="button" href="#loginPage">Sign In</a>
-        <a id="register" data-role="button" href="#registerPage"></a>
+        <a id="register" data-role="button" href="#registerPage">Register</a>
     </div>
     <div data-role="content">
         <ul data-role="listview" data-inset="true">
@@ -27,7 +27,13 @@
             <li><a id="lessons" href="#lessonPage">Lessons</a></li>
             <li><a id="quiz" href="#quizpage">Quiz</a></li>
             <li><a id="settings" href="#settingsPage">Settings</a></li>
+
+
         </ul>
+        <label for="useremail">Email:</label>
+        <input type="text" id="gal" size="30">
+        <button data-role="button" id="galpost">Log-In</button>
+
         <div id="map-canvas"></div>
     </div>
     <div data-role="footer" data-position="fixed" class="ui-bar">

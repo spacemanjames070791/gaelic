@@ -3,14 +3,12 @@ var score = 0;
 var answered = 0;
 
 /*globals $, popupConfirm, popupAlert, userEmail URL */
-//var URL = "http://gaelic-1281.appspot.com/";
-var URL = "http://localhost:8080/";
+var URL = "http://gaelic-1281.appspot.com/";
+//var URL = "http://localhost:8080/";
 localStorage.setItem("loggedin", 1);
 localStorage.setItem("currentuser", "Neil");
 
 $(document).ready(function(){
-    if(localStorage.loggedin==1)
-        $("#signin").text("Logout");
     if(!!navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(handlePosition);
         }
@@ -72,7 +70,8 @@ function doTranslate() {
 }
 
 function doGet() {
-    //if(localStorage.getItem("loggedin")==1){
+    alert("do get");
+    if(localStorage.getItem("loggedin")==1){
         $("#currentUser").text(localStorage.currentuser);
         $.ajax({
             type: "GET",
@@ -81,6 +80,7 @@ function doGet() {
             contentType: "application/javascript",
             dataType: 'jsonp',
             success: function (json) {
+                alert("questions");
                 handleJsonResponse(json);
             },
             error: function (e) {
@@ -88,7 +88,11 @@ function doGet() {
                 alert("failure");
             }
         });
-    //}
+    }
+    else {
+        $("#questions").html('<p>You need to log in to access the quiz section</p>' +
+        '<a id="signin" data-role="button" href="#loginPage">Sign In</a>')
+    }
 }
 
 function handleJsonResponse(json) {
@@ -119,5 +123,5 @@ function formatMessage(ques) {
         "<li>" + "<a class ='choose' id='opt4' href='#'>" + ques.opt4 + "</a>" + "</li>";
     html += "</div></li>";
     return html;
-
 }
+

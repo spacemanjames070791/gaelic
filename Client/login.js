@@ -1,8 +1,8 @@
 /**
  * Created by Neil on 25/04/2016.
  */
-//var URL = "http://gaelic-1281.appspot.com/";
-var URL = "http://localhost:8080/";
+var URL = "http://gaelic-1281.appspot.com/";
+//var URL = "http://localhost:8080/";
 
 $(document).ready(function(){
     $( "#registerForm" ).submit(function( event ) {
@@ -15,19 +15,14 @@ $(document).ready(function(){
 
 function doRegister(){
     $.ajax({
-        type: "GET",
-        url: URL + "register?email=" + $("#registeremail").val() + "&username=" + $("#firstname").val() + "&password="
-        + $("#registerpassword").val(),
-        async: true,
-        contentType: "application/javascript",
-        dataType: 'jsonp',
-        success: function (json) {
-            alert("added user");
-        },
-        error: function (e) {
-            popupConfirm("Error", e.message);
-            alert("failure");
-        }
+        type: "POST",
+        url: URL + "register",
+        data: {email:$("#registeremail").val(), password:$("#registerpassword").val(), username:$("#firstname").val()}
+    }).done(function (data, textStatus, jqXHR) {
+        // The AJAX call was successful, so we can clear out the message field.
+        console.log("OK");
+    }).fail(function (data, errStatus) {
+        console.log("Crap happened!");
     });
 }
 
