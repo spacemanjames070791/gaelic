@@ -3,13 +3,12 @@ var score = 0;
 var answered = 0;
 
 /*globals $, popupConfirm, popupAlert, userEmail URL */
-//var URL = "http://gaelic-1281.appspot.com/";
-var URL = "http://localhost:8080/";
+var URL = "http://gaelic-1281.appspot.com/";
+//var URL = "http://localhost:8080/";
 localStorage.setItem("loggedin", 1);
 localStorage.setItem("currentuser", "Neil");
 
 $(document).ready(function(){
-
     if(localStorage.loggedin==1)
         $("#signin").text("Logout");
     if(!!navigator.geolocation) {
@@ -26,17 +25,15 @@ $(document).ready(function(){
 function answerBox() {
     answered++;
     if ($(this).text() == answer){
-        alert("Correct!");
         score++
     }
-    else
-        alert("Eh...er, the answer was " + answer);
 
     upQuestion();
     if(answered==3){
         alert("You scored " + score);
         answered=0;
         score=0;
+        $.mobile.changePage("#home");
     }
 
 }
@@ -75,8 +72,7 @@ function doTranslate() {
 }
 
 function doGet() {
-    //if(localStorage.loggedin==1) {
-        $.mobile.changePage("#quizpage");
+    if(localStorage.getItem("loggedin")==1){
         $("#currentUser").text(localStorage.currentuser);
         $.ajax({
             type: "GET",
@@ -86,16 +82,13 @@ function doGet() {
             dataType: 'jsonp',
             success: function (json) {
                 handleJsonResponse(json);
-
             },
             error: function (e) {
                 popupConfirm("Error", e.message);
                 alert("failure");
             }
         });
-    //}
-    //else
-        //alert("You need to login to use the quiz section");
+    }
 }
 
 function handleJsonResponse(json) {
