@@ -60,10 +60,6 @@ class Question(ndb.Model):
 	opt3 = ndb.StringProperty()
 	opt4 = ndb.StringProperty()
 	answer = ndb.StringProperty()
-	timestamp = ndb.DateTimeProperty(auto_now_add=True)
-
-	def toString(self):
-		return self.user + ':' + self.message + ':' + self.timestamp.strftime("%A %d/%m/%Y %H:%M")
 
 	def toJSON(self):
 		jsonquestion = {
@@ -248,23 +244,86 @@ class TranslateWord(webapp2.RequestHandler):
 
 class MainHandler(webapp2.RequestHandler):
 	def get(self):
-		self.response.write(link)
+		useremail = 'neil@mars.com'
+		user = User(id=useremail)
+		user.useremail = useremail
+		user.username = 'Neil'
+		user.password = 'nimbus'
+		user.put()
 
-class Testpost(webapp2.RequestHandler):
-	def post(self, english):
+		useremail = 'jamie@spacestation.com'
+		user = User(id=useremail)
+		user.useremail = useremail
+		user.username = 'Jamie'
+		user.password = 'crazyfrog'
+		user.put()
+
+		question = 'What is the word for Water?'
+		msg = Question(id=question)
+		msg.question = question
+		msg.opt1 = 'an t-aran'
+		msg.opt2 = 'an t-im'
+		msg.opt3 = 'an t-uisge'
+		msg.opt4 = 'am bainne'
+		msg.answer = 'am bainne'
+		msg.put()
+
+		question = 'What is the word for Butter?'
+		msg = Question(id=question)
+		msg.question = question
+		msg.opt1 = 'an t-aran'
+		msg.opt2 = 'an t-im'
+		msg.opt3 = 'an t-uisge'
+		msg.opt4 = 'am bainne'
+		msg.answer = 'an t-im'
+		msg.put()
+
+		question = 'What is the word for Milk?'
+		msg = Question(id=question)
+		msg.question = question
+		msg.opt1 = 'an t-aran'
+		msg.opt2 = 'an t-im'
+		msg.opt3 = 'an t-uisge'
+		msg.opt4 = 'am bainne'
+		msg.answer = 'am bainne'
+		msg.put()
+
+		question = 'What is the word for Bread?'
+		msg = Question(id=question)
+		msg.question = question
+		msg.opt1 = 'an t-aran'
+		msg.opt2 = 'an t-im'
+		msg.opt3 = 'an t-uisge'
+		msg.opt4 = 'am bainne'
+		msg.answer = 'an t-aran'
+		msg.put()
+
 		englishWord = 'Hello'
 		word = Word(id=englishWord)
 		word.englishWord = 'Hello'
-		word.gaelicWord = self.request.get('gaelicWord')
+		word.gaelicWord = 'Halo'
 		word.pronunciation = 'pronounce'
 		word.plural = 'plural'
 		word.put()
-		self.response.write(word.toJSON())
+
+		englishWord = 'Welcome'
+		word = Word(id=englishWord)
+		word.englishWord = 'Welcome'
+		word.gaelicWord = 'Faite'
+		word.pronunciation = 'pronounce'
+		word.plural = 'plural'
+		word.put()
+
+		townName = 'Glasgow'
+		town = Town(id=townName)
+		town.townName = townName
+		town.gaelic = 'Ghlaschu'
+		town.put()
+		self.response.write(link)
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/load', LoadQuestions),
-	('/test/(.*)', Testpost),
 	('/translateWord/(.*)', TranslateWord),
 	('/questions', QuestionHandler),
 	('/register', NewUser),

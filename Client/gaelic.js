@@ -1,10 +1,11 @@
-var qnumber = 1;
+var qnumber = 0;
 var score = 0;
 var answered = 0;
+var totalQuestions = 0;
 
 /*globals $, popupConfirm, popupAlert, userEmail URL */
-var URL = "http://gaelic-1281.appspot.com/";
-//var URL = "http://localhost:8080/";
+//var URL = "http://gaelic-1281.appspot.com/";
+var URL = "http://localhost:8080/";
 localStorage.setItem("loggedin", 1);
 localStorage.setItem("currentuser", "Neil");
 
@@ -23,11 +24,11 @@ $(document).ready(function(){
 function answerBox() {
     answered++;
     if ($(this).text() == answer){
-        score++
+        score++;
     }
 
     upQuestion();
-    if(answered==3){
+    if(answered==totalQuestions){
         alert("You scored " + score);
         answered=0;
         score=0;
@@ -38,16 +39,8 @@ function answerBox() {
 
 function upQuestion(){
     qnumber++;
-    if(qnumber>2)
+    if(qnumber>totalQuestions)
         qnumber=0;
-
-    doGet();
-}
-
-function downQuestion(){
-    qnumber--;
-    if(qnumber<0)
-        qnumber=2;
 
     doGet();
 }
@@ -60,6 +53,7 @@ function doTranslate() {
         contentType: "application/javascript",
         dataType: 'jsonp',
         success: function (json) {
+
             handleWord(json);
         },
         error: function (e) {
@@ -70,7 +64,6 @@ function doTranslate() {
 }
 
 function doGet() {
-    alert("do get");
     if(localStorage.getItem("loggedin")==1){
         $("#currentUser").text(localStorage.currentuser);
         $.ajax({
@@ -80,7 +73,7 @@ function doGet() {
             contentType: "application/javascript",
             dataType: 'jsonp',
             success: function (json) {
-                alert("questions");
+                totalQuestions = json.length;
                 handleJsonResponse(json);
             },
             error: function (e) {
