@@ -67,7 +67,6 @@ class Question(ndb.Model):
 
 	def toJSON(self):
 		jsonquestion = {
-			"user": self.user,
 			"message": self.message,
 			"opt1": self.opt1,
 			"opt2": self.opt2,
@@ -168,7 +167,6 @@ class LoadQuestions(webapp2.RequestHandler):
 
 		question = 'What is the word for cold?'
 		msg = Question(id=question)
-		msg.user = 'neil@bedrock.com'
 		msg.message = 'What is the word for cold?'
 		msg.opt1 = 'fuar'
 		msg.opt2 = 'blah'
@@ -179,7 +177,6 @@ class LoadQuestions(webapp2.RequestHandler):
 
 		question = 'What is the word for Butter?'
 		msg = Question(id=question)
-		msg.user = 'neil@bedrock.com'
 		msg.message = 'What is the word for Butter?'
 		msg.opt1 = 'an t-aran'
 		msg.opt2 = 'an t-im'
@@ -190,7 +187,6 @@ class LoadQuestions(webapp2.RequestHandler):
 
 		question = 'What is the correct grammar for "I am going to be happy"?'
 		msg = Question(id=question)
-		msg.user = 'neil@bedrock.com'
 		msg.message = 'What is the correct grammar for "I am going to be happy"'
 		msg.opt1 = 'Bi toilichte!'
 		msg.opt2 = 'Bidh thu toilichte.'
