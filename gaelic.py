@@ -80,14 +80,12 @@ class User(ndb.Model):
 	useremail = ndb.StringProperty(required = True)
 	username = ndb.StringProperty(required=True)
 	password = ndb.StringProperty()
-	isOnline = ndb.BooleanProperty()
 
 	def toJSON(self):
 		jsonuser = {
 			"useremail" : self.useremail,
 			"username": self.username,
 			"password": self.password,
-			"isOnline": self.isOnline
 		}
 		return json.encode(jsonuser)
 
@@ -112,7 +110,6 @@ class NewUser(webapp2.RequestHandler):
 		usr.useremail = email
 		usr.username = username
 		usr.password = password
-		usr.isOnline = False
 		usr.put()
 		self.response.write("User added")
 
@@ -154,7 +151,6 @@ class LoadQuestions(webapp2.RequestHandler):
 		user.useremail = useremail
 		user.username = 'Neil'
 		user.password = 'nimbus'
-		user.isOnline = False
 		user.put()
 
 		useremail = 'jamie@spacestation.com'
@@ -162,7 +158,6 @@ class LoadQuestions(webapp2.RequestHandler):
 		user.useremail = useremail
 		user.username = 'Jamie'
 		user.password = 'crazyfrog'
-		user.isOnline = False
 		user.put()
 
 		question = 'What is the word for cold?'
