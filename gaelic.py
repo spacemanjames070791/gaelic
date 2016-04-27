@@ -225,16 +225,8 @@ class LoadQuestions(webapp2.RequestHandler):
 
 class QuestionHandler(webapp2.RequestHandler):
 
-	def get(self, user):
-		# Note - depending on the URL, we should return messages from .
-		# only a specified user or any user.
-		# We'd rather get the last 6 messages from any users...
-		logging.info("USER=" + user)
-		logging.info(bool(user != ""))
-		if user != "":
-			questions = Question.query(Question.user == user).order(-Question.timestamp).fetch(5)
-		else:
-			questions = Question.query().order(-Question.timestamp).fetch(5)
+	def get(self):
+		questions = Question.query()
 		jsonresponse = ''
 		callback = self.request.get('callback')
 		# Now build a response of JSON messages..
@@ -271,7 +263,7 @@ app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/load', LoadQuestions),
 	('/translateWord/(.*)', TranslateWord),
-	('/users/(.*)', QuestionHandler),
+	('/questions', QuestionHandler),
 	('/register', NewUser),
 	('/login/(.*)/(.*)', Login),
 	('/location/(.*)', Location)

@@ -3,8 +3,8 @@ var score = 0;
 var answered = 0;
 
 /*globals $, popupConfirm, popupAlert, userEmail URL */
-var URL = "http://gaelic-1281.appspot.com/";
-//var URL = "http://localhost:8080/";
+//var URL = "http://gaelic-1281.appspot.com/";
+var URL = "http://localhost:8080/";
 localStorage.setItem("loggedin", 1);
 localStorage.setItem("currentuser", "Neil");
 
@@ -72,11 +72,11 @@ function doTranslate() {
 }
 
 function doGet() {
-    if(localStorage.getItem("loggedin")==1){
+    //if(localStorage.getItem("loggedin")==1){
         $("#currentUser").text(localStorage.currentuser);
         $.ajax({
             type: "GET",
-            url: URL + "users/neil@bedrock.com",
+            url: URL + "questions",
             async: true,
             contentType: "application/javascript",
             dataType: 'jsonp',
@@ -88,7 +88,7 @@ function doGet() {
                 alert("failure");
             }
         });
-    }
+    //}
 }
 
 function handleJsonResponse(json) {
