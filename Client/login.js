@@ -12,16 +12,24 @@ $(document).ready(function(){
 });
 
 function doRegister(){
-    $.ajax({
-        type: "POST",
-        url: URL + "register",
-        data: {email:$("#registeremail").val(), password:$("#registerpassword").val(), username:$("#firstname").val()}
-    }).done(function (data, textStatus, jqXHR) {
-        // The AJAX call was successful, so we can clear out the message field.
-        console.log("OK");
-    }).fail(function (data, errStatus) {
-        console.log("Crap happened!");
-    });
+    if($("#registeremail").val()=="" || $("#registerpassword").val()=="" || $("#firstname").val()=="")
+        alert("Please enter all fields");
+    else {
+        $.ajax({
+            type: "POST",
+            url: URL + "register",
+            data: {
+                email: $("#registeremail").val(),
+                password: $("#registerpassword").val(),
+                username: $("#firstname").val()
+            }
+        }).done(function (data, textStatus, jqXHR) {
+            // The AJAX call was successful, so we can clear out the message field.
+            console.log("OK");
+        }).fail(function (data, errStatus) {
+            console.log("Crap happened!");
+        });
+    }
 }
 
 function doLoginProcess() {
