@@ -11,6 +11,7 @@
     <script src="login.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
     <script src="geocode.js"></script>
+    <script src="gaelic.css"></script>
 </head>
 
 <body>
@@ -63,10 +64,41 @@
 
 <div id="lessonPage" data-role="page">
     <div data-role="header">
-        <h1>Favourite Food</h1>
+        <h1>Lesson</h1>
         <a href="#" data-rel="back" data-icon="back">Back</a>
     </div>
     <div data-role="content">
+        <h2>Introduce yourself</h2>
+        <table data-role="table" data-mode="columntoggle" border="1" cellpadding="20" class="ui-shadow" id="introducetable">
+            <thead>
+            <tr>
+              <th data-priority="1">Gaelic</th>
+              <th data-priority="2">English</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+                <td>Is mise</td>
+                <td>My name is</td>
+            </tr>
+            <tr>
+                <td>Dè an t-ainm a th'ort?</td>
+                <td>What is you name?</td>
+            </tr>
+            <tr>
+                <td>Ciamar a tha thu?</td>
+                <td>How are you?</td>
+            </tr>
+            <tr>
+                <td>Tha mi a 'tuigsinn</td>
+                <td>I understand</td>
+            </tr>
+            <tr>
+                <td>Chan eil mi a 'tuigsinn</td>
+                <td>I don't understand</td>
+            </tr>
+          </tbody>
+        </table>
 
     </div>
     <div data-role="footer" data-position="fixed" class="ui-bar">
