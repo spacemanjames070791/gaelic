@@ -96,10 +96,10 @@ function handleJsonResponse(json) {
     //}
     answer=json[qnumber].answer;
     $("#questions").html(html).listview('refresh');
-    $("#opt1").on('click', answerBox);
-    $("#opt2").on('click', answerBox);
-    $("#opt3").on('click', answerBox);
-    $("#opt4").on('click', answerBox);
+    $("#option1").on('click', answerBox);
+    $("#option2").on('click', answerBox);
+    $("#option3").on('click', answerBox);
+    $("#option4").on('click', answerBox);
 }
 
 function handleWord(json) {
@@ -111,10 +111,10 @@ function handleWord(json) {
 
 function formatMessage(ques) {
     html = "<li><div class='ui-li-desc'>" + "<h5 style ='white-space:normal;' class='ui-li-heading'>" + ques.question + "</h5>" +
-        "<li>" + "<a class ='choose' id='opt1' href='#'>" + ques.option1 + "</a>" + "</li>" +
-        "<li>" + "<a class ='choose' id='opt2' href='#'>" + ques.option2 + "</a>" + "</li>" +
-        "<li>" + "<a class ='choose' id='opt3' href='#'>" + ques.option3 + "</a>" + "</li>" +
-        "<li>" + "<a class ='choose' id='opt4' href='#'>" + ques.option4 + "</a>" + "</li>";
+        "<li>" + "<a class ='choose' id='option1' href='#'>" + ques.option1 + "</a>" + "</li>" +
+        "<li>" + "<a class ='choose' id='option2' href='#'>" + ques.option2 + "</a>" + "</li>" +
+        "<li>" + "<a class ='choose' id='option3' href='#'>" + ques.option3 + "</a>" + "</li>" +
+        "<li>" + "<a class ='choose' id='option4' href='#'>" + ques.option4 + "</a>" + "</li>";
     html += "</div></li>";
     return html;
 }
