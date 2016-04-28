@@ -12,16 +12,24 @@ $(document).ready(function(){
 });
 
 function doRegister(){
-    $.ajax({
-        type: "POST",
-        url: URL + "register",
-        data: {email:$("#registeremail").val(), password:$("#registerpassword").val(), username:$("#firstname").val()}
-    }).done(function (data, textStatus, jqXHR) {
-        // The AJAX call was successful, so we can clear out the message field.
-        console.log("OK");
-    }).fail(function (data, errStatus) {
-        console.log("Crap happened!");
-    });
+    if($("#registeremail").val()=="" || $("#registerpassword").val()=="" || $("#firstname").val()=="")
+        alert("Please enter all fields");
+    else {
+        $.ajax({
+            type: "POST",
+            url: URL + "register",
+            data: {
+                email: $("#registeremail").val(),
+                password: $("#registerpassword").val(),
+                username: $("#firstname").val()
+            }
+        }).done(function (data, textStatus, jqXHR) {
+            // The AJAX call was successful, so we can clear out the message field.
+            console.log("OK");
+        }).fail(function (data, errStatus) {
+            console.log("Crap happened!");
+        });
+    }
 }
 
 function doLoginProcess() {
@@ -49,19 +57,8 @@ function doLoginProcess() {
     });
 }
 
-function goLogin(){
-    alert("Login");
-    var user = $("#useremail").val(), pwd = $("#userpassword").val();
-    localStorage.setItem("user", {user: user, password: pwd});
-    goHome();
-}
-
 function goHome() {
     $.mobile.changePage("#home");
-}
-
-function checkLogin() {
-    return localStorage.login != null;
 }
 
 function checkCredential(json){
@@ -77,20 +74,9 @@ function checkCredential(json){
     }
 }
 
-function doLogin() {
-    alert("notLoggedIn");
-    var notLoggedIn = true;
-    if(!checkLogin()) {
-        popupLogin(function okFunc(){
-            var result = getLoginValues();
-            localStorage.setItem("login", result);
-            notLoggedIn = false;
-        }, function cancelFunc(){
-            notLoggedIn = true;
-        });
-    }
-
-    if(notLoggedIn) {
-        popupAlert("You need to be logged in!");
-    }
+function goLogin(){
+    alert("Login");
+    var user = $("#useremail").val(), pwd = $("#userpassword").val();
+    localStorage.setItem("user", {user: user, password: pwd});
+    goHome();
 }
