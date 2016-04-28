@@ -255,13 +255,13 @@ class TestHandler(webapp2.RequestHandler):
 		town.gaelic = 'Phaslig'
 		town.put()
 
-
 class MainHandler(webapp2.RequestHandler):
 	def get(self):
 		self.response.write(link)
 
 app = webapp2.WSGIApplication([
-    ('/', MainHandler),
+	('/', MainHandler),
+    ('/fill', TestHandler),
 	('/translateWord/(.*)', TranslateWord),
 	('/questions', QuestionHandler),
 	('/register', NewUser),
