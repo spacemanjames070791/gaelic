@@ -110,11 +110,11 @@ function handleWord(json) {
 }
 
 function formatMessage(ques) {
-    html = "<li><div class='ui-li-desc'>" + "<h5 style ='white-space:normal;' class='ui-li-heading'>" + ques.message + "</h5>" +
-        "<li>" + "<a class ='choose' id='opt1' href='#'>" + ques.opt1 + "</a>" + "</li>" +
-        "<li>" + "<a class ='choose' id='opt2' href='#'>" + ques.opt2 + "</a>" + "</li>" +
-        "<li>" + "<a class ='choose' id='opt3' href='#'>" + ques.opt3 + "</a>" + "</li>" +
-        "<li>" + "<a class ='choose' id='opt4' href='#'>" + ques.opt4 + "</a>" + "</li>";
+    html = "<li><div class='ui-li-desc'>" + "<h5 style ='white-space:normal;' class='ui-li-heading'>" + ques.question + "</h5>" +
+        "<li>" + "<a class ='choose' id='opt1' href='#'>" + ques.option1 + "</a>" + "</li>" +
+        "<li>" + "<a class ='choose' id='opt2' href='#'>" + ques.option2 + "</a>" + "</li>" +
+        "<li>" + "<a class ='choose' id='opt3' href='#'>" + ques.option3 + "</a>" + "</li>" +
+        "<li>" + "<a class ='choose' id='opt4' href='#'>" + ques.option4 + "</a>" + "</li>";
     html += "</div></li>";
     return html;
 }
