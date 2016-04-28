@@ -27,8 +27,11 @@ link = """
 <html><head><title>Gaelic App</title></head>
 <body>
 	<h1>Gaelic Translation Services</h1>
+	<h2>Click the haggis!</h2>
 
-	<a href="html/index.html">Go to app main page</a>
+	<a href="html/index.html">
+		<img src="https://s-media-cache-ak0.pinimg.com/736x/e7/78/e7/e778e74891d1ef133f86055446ad9585.jpg" alt="photo_na.jpg" style="width:100%; height:100%;">
+	</a>
 </body>
 """
 
@@ -40,7 +43,7 @@ class Word(ndb.Model):
 	timestamp = ndb.DateTimeProperty(auto_now_add=True)
 
 	def toString(self):
-		return self.englishWord + ':' + self.gaelicWord + ':' + self.timestamp.strftime("%A %d/%m/%Y %H:%M")
+		return self.englishWord + ':' + self.gaelicWord + ':'
 
 	def toJSON(self):
 		jsonword = {
@@ -168,6 +171,91 @@ class TranslateWord(webapp2.RequestHandler):
 			self.response.write('[' + jsonresponse[:-1] + ']')
 		else:
 			self.response.write(callback + '([' + jsonresponse[:-1] + ']);')
+
+class TestHandler(webapp2.RequestHandler):
+	def get(self):
+		useremail = 'neil@mars.com'
+		user = User(id=useremail)
+		user.useremail = useremail
+		user.username = 'Neil'
+		user.password = 'nimbus'
+		user.put()
+
+		useremail = 'jamie@spacestation.com'
+		user = User(id=useremail)
+		user.useremail = useremail
+		user.username = 'Jamie'
+		user.password = 'crazyfrog'
+		user.put()
+
+		question = 'What is the word for Water?'
+		qst = Question(id=question)
+		qst.question = question
+		qst.option1 = 'an t-aran'
+		qst.option2 = 'an t-im'
+		qst.option3 = 'an t-uisge'
+		qst.option4 = 'am bainne'
+		qst.answer = 'an t-uisge'
+		qst.put()
+
+		question = 'What is the word for Butter?'
+		qst = Question(id=question)
+		qst.question = question
+		qst.option1 = 'an t-aran'
+		qst.option2 = 'an t-im'
+		qst.option3 = 'an t-uisge'
+		qst.option4 = 'am bainne'
+		qst.answer = 'an t-im'
+		qst.put()
+
+		question = 'What is the word for Milk?'
+		qst = Question(id=question)
+		qst.question = question
+		qst.option1 = 'an t-aran'
+		qst.option2 = 'an t-im'
+		qst.option3 = 'an t-uisge'
+		qst.option4 = 'am bainne'
+		qst.answer = 'am bainne'
+		qst.put()
+
+		question = 'What is the word for Bread?'
+		qst = Question(id=question)
+		qst.question = question
+		qst.option1 = 'an t-aran'
+		qst.option2 = 'an t-im'
+		qst.option3 = 'an t-uisge'
+		qst.option4 = 'am bainne'
+		qst.answer = 'an t-aran'
+		qst.put()
+
+		englishWord = 'Hello'
+		word = Word(id=englishWord)
+		word.englishWord = 'Hello'
+		word.gaelicWord = 'Halo'
+		word.pronunciation = 'pronounce'
+		word.plural = 'plural'
+		word.put()
+
+		englishWord = 'Welcome'
+		word = Word(id=englishWord)
+		word.englishWord = 'Welcome'
+		word.gaelicWord = 'Faite'
+		word.pronunciation = 'pronounce'
+		word.plural = 'plural'
+		word.put()
+
+		townName = 'Glasgow'
+		town = Town(id=townName)
+		town.townName = townName
+		town.gaelic = 'Ghlaschu'
+		town.put()
+
+
+		townName = 'Paisley'
+		town = Town(id=townName)
+		town.townName = townName
+		town.gaelic = 'Phaslig'
+		town.put()
 
 
 class MainHandler(webapp2.RequestHandler):
