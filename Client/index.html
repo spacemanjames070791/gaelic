@@ -16,10 +16,9 @@
 <body>
 <div id="home" data-role="page">
     <div data-role="header">
+        <h1>Gaelic<br>Translation<br>Services</h1>
         <h2 id="user"></h2>
         <h5 id="postcode"></h5>
-        <a id="signin" data-role="button" href="#loginPage">Sign In</a>
-        <a id="register" data-role="button" href="#registerPage">Register</a>
     </div>
     <div data-role="content">
         <ul data-role="listview" data-inset="true">
@@ -33,21 +32,20 @@
     </div>
     <div data-role="footer" data-position="fixed" class="ui-bar">
         <nav>
+            <a href="#loginPage" data-role="button" data-inline="true" data-theme="c">Sign In</a>
+            <a href="#registerPage" data-role="button" data-inline="true" data-theme="c">Register</a>
         </nav>
     </div>
 </div>
 
 <div id="translatePage" data-role="page">
     <div data-role="header">
-        <h1>Singular Word Translation</h1>
+        <h1>Singular<br>Word<br>Translation</h1>
         <a href="#" data-rel="back" data-icon="back">Back</a>
     </div>
     <div data-role="content">
-        <select>
-            <option value="translate1">English - Gaelic</option>
-
-        </select>
-        <label for="singleWord"></label>
+        <h2>Please enter a word in English to translate into Gaelic</h2>
+        <label for="singleWord">English Word</label>
         <input id="singleWord" type="text"/>
 
         <ul data-role="listview" data-inset="true">
@@ -84,7 +82,7 @@
         <a href="#" data-rel="back" data-icon="back">Back</a>
     </div>
     <div data-role="content">
-        <ul id="questions" data-role="listview" data-inset="true">
+        <ul id="questions" data-role="listview" data-inset="true" data-theme="a">
             <!-- Questions go here. -->
         </ul>
     </div>
@@ -96,7 +94,7 @@
 
 <div id="settingsPage" data-role="page">
     <div data-role="header">
-        <h1>username</h1>
+        <h1>Settings</h1>
         <a href="#" data-rel="back" data-icon="back">Back</a>
 
     </div>
