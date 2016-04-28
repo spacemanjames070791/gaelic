@@ -63,10 +63,10 @@ class Question(ndb.Model):
 	def toJSON(self):
 		jsonquestion = {
 			"question": self.question,
-			"option1": self.opt1,
-			"option2": self.opt2,
-			"option3": self.opt3,
-			"option4": self.opt4,
+			"option1": self.option1,
+			"option2": self.option2,
+			"option3": self.option3,
+			"option4": self.option4,
 			"answer": self.answer
 		}
 		return json.encode(jsonquestion)
@@ -172,6 +172,7 @@ class TranslateWord(webapp2.RequestHandler):
 
 class MainHandler(webapp2.RequestHandler):
 	def get(self):
+		self.response.write(link)
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),

@@ -6,7 +6,7 @@ var totalQuestions = 0;
 /*globals $, popupConfirm, popupAlert, userEmail URL */
 //var URL = "http://gaelic-1281.appspot.com/";
 var URL = "http://localhost:8080/";
-localStorage.setItem("loggedin", 0);
+localStorage.setItem("loggedin", 1);
 localStorage.setItem("currentuser", "");
 
 $(document).ready(function(){
@@ -110,6 +110,7 @@ function handleWord(json) {
 }
 
 function formatMessage(ques) {
+    alert("formatting" + ques.question);
     html = "<li><div class='ui-li-desc'>" + "<h5 style ='white-space:normal;' class='ui-li-heading'>" + ques.question + "</h5>" +
         "<li>" + "<a class ='choose' id='opt1' href='#'>" + ques.option1 + "</a>" + "</li>" +
         "<li>" + "<a class ='choose' id='opt2' href='#'>" + ques.option2 + "</a>" + "</li>" +
