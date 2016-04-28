@@ -65,3 +65,10 @@ function checkCredential(json){
         alert("Login failed");
     }
 }
+
+function goLogin(){
+    alert("Login");
+    var user = $("#useremail").val(), pwd = $("#userpassword").val();
+    localStorage.setItem("user", {user: user, password: pwd});
+    goHome();
+}
