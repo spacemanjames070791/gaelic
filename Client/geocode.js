@@ -7,7 +7,6 @@ var map;
 var marker;
 
 $(document).ready(function () {
-
     google.maps.event.addDomListener(window, 'load', initialize);
     if(!!navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(handlePosition);
