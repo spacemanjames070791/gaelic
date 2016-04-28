@@ -172,6 +172,7 @@ class TranslateWord(webapp2.RequestHandler):
 
 class MainHandler(webapp2.RequestHandler):
 	def get(self):
+		self.response.write(link)
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
