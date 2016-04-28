@@ -4,8 +4,8 @@ var answered = 0;
 var totalQuestions = 0;
 
 /*globals $, popupConfirm, popupAlert, userEmail URL */
-//var URL = "http://gaelic-1281.appspot.com/";
-var URL = "http://localhost:8080/";
+var URL = "http://gaelic-1281.appspot.com/";
+//var URL = "http://localhost:8080/";
 localStorage.setItem("loggedin", 0);
 localStorage.setItem("currentuser", "");
 
