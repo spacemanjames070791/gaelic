@@ -53,21 +53,20 @@ class Word(ndb.Model):
 		return json.encode(jsonword)
 
 class Question(ndb.Model):
-	user = ndb.StringProperty()
-	message = ndb.StringProperty()
-	opt1 = ndb.StringProperty()
-	opt2 = ndb.StringProperty()
-	opt3 = ndb.StringProperty()
-	opt4 = ndb.StringProperty()
+	question = ndb.StringProperty()
+	option1 = ndb.StringProperty()
+	option2 = ndb.StringProperty()
+	option3 = ndb.StringProperty()
+	option4 = ndb.StringProperty()
 	answer = ndb.StringProperty()
 
 	def toJSON(self):
 		jsonquestion = {
-			"message": self.message,
-			"opt1": self.opt1,
-			"opt2": self.opt2,
-			"opt3": self.opt3,
-			"opt4": self.opt4,
+			"question": self.question,
+			"option1": self.opt1,
+			"option2": self.opt2,
+			"option3": self.opt3,
+			"option4": self.opt4,
 			"answer": self.answer
 		}
 		return json.encode(jsonquestion)
@@ -146,8 +145,8 @@ class QuestionHandler(webapp2.RequestHandler):
 		jsonresponse = ''
 		callback = self.request.get('callback')
 		# Now build a response of JSON messages..
-		for question in questions:
-			jsonresponse += question.toJSON() + ','
+		for qstn in questions:
+			jsonresponse += qstn.toJSON() + ','
 		# and add in the callback function if required...
 		if(callback == ''):
 			self.response.write('[' + jsonresponse[:-1] + ']')
@@ -173,82 +172,6 @@ class TranslateWord(webapp2.RequestHandler):
 
 class MainHandler(webapp2.RequestHandler):
 	def get(self):
-		useremail = 'neil@mars.com'
-		user = User(id=useremail)
-		user.useremail = useremail
-		user.username = 'Neil'
-		user.password = 'nimbus'
-		user.put()
-
-		useremail = 'jamie@spacestation.com'
-		user = User(id=useremail)
-		user.useremail = useremail
-		user.username = 'Jamie'
-		user.password = 'crazyfrog'
-		user.put()
-
-		message = 'What is the word for Water?'
-		msg = Question(id=message)
-		msg.message = message
-		msg.opt1 = 'an t-aran'
-		msg.opt2 = 'an t-im'
-		msg.opt3 = 'an t-uisge'
-		msg.opt4 = 'am bainne'
-		msg.answer = 'an t-uisge'
-		msg.put()
-
-		message = 'What is the word for Butter?'
-		msg = Question(id=message)
-		msg.message = message
-		msg.opt1 = 'an t-aran'
-		msg.opt2 = 'an t-im'
-		msg.opt3 = 'an t-uisge'
-		msg.opt4 = 'am bainne'
-		msg.answer = 'an t-im'
-		msg.put()
-
-		message = 'What is the word for Milk?'
-		msg = Question(id=message)
-		msg.message = message
-		msg.opt1 = 'an t-aran'
-		msg.opt2 = 'an t-im'
-		msg.opt3 = 'an t-uisge'
-		msg.opt4 = 'am bainne'
-		msg.answer = 'am bainne'
-		msg.put()
-
-		message = 'What is the word for Bread?'
-		msg = Question(id=message)
-		msg.message = message
-		msg.opt1 = 'an t-aran'
-		msg.opt2 = 'an t-im'
-		msg.opt3 = 'an t-uisge'
-		msg.opt4 = 'am bainne'
-		msg.answer = 'an t-aran'
-		msg.put()
-
-		englishWord = 'Hello'
-		word = Word(id=englishWord)
-		word.englishWord = 'Hello'
-		word.gaelicWord = 'Halo'
-		word.pronunciation = 'pronounce'
-		word.plural = 'plural'
-		word.put()
-
-		englishWord = 'Welcome'
-		word = Word(id=englishWord)
-		word.englishWord = 'Welcome'
-		word.gaelicWord = 'Faite'
-		word.pronunciation = 'pronounce'
-		word.plural = 'plural'
-		word.put()
-
-		townName = 'Glasgow'
-		town = Town(id=townName)
-		town.townName = townName
-		town.gaelic = 'Ghlaschu'
-		town.put()
-		self.response.write(link)
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
