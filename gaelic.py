@@ -26,12 +26,10 @@ import logging
 link = """
 <html><head><title>Gaelic App</title></head>
 <body>
-	<h1>Gaelic Translation Services</h1>
-	<h2>Click the haggis!</h2>
+	<h1>Loading, please wait...</h1>
 
-	<a href="html/index.html">
-		<img src="https://s-media-cache-ak0.pinimg.com/736x/e7/78/e7/e778e74891d1ef133f86055446ad9585.jpg" alt="photo_na.jpg" style="width:100%; height:100%;">
-	</a>
+	<meta HTTP-EQUIV="REFRESH" content="0; url=http://gaelic-1281.appspot.com/html/index.html">
+
 </body>
 """
 
