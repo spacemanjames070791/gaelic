@@ -49,19 +49,8 @@ function doLoginProcess() {
     });
 }
 
-function goLogin(){
-    alert("Login");
-    var user = $("#useremail").val(), pwd = $("#userpassword").val();
-    localStorage.setItem("user", {user: user, password: pwd});
-    goHome();
-}
-
 function goHome() {
     $.mobile.changePage("#home");
-}
-
-function checkLogin() {
-    return localStorage.login != null;
 }
 
 function checkCredential(json){
@@ -74,23 +63,5 @@ function checkCredential(json){
         $.mobile.changePage("#home");
     }else{
         alert("Login failed");
-    }
-}
-
-function doLogin() {
-    alert("notLoggedIn");
-    var notLoggedIn = true;
-    if(!checkLogin()) {
-        popupLogin(function okFunc(){
-            var result = getLoginValues();
-            localStorage.setItem("login", result);
-            notLoggedIn = false;
-        }, function cancelFunc(){
-            notLoggedIn = true;
-        });
-    }
-
-    if(notLoggedIn) {
-        popupAlert("You need to be logged in!");
     }
 }
