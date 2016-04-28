@@ -1,8 +1,6 @@
 /**
  * Created by Neil on 25/04/2016.
  */
-//var URL = "http://gaelic-1281.appspot.com/";
-var URL = "http://localhost:8080/";
 
 $(document).ready(function(){
     $( "#registerForm" ).submit(function( event ) {

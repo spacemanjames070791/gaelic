@@ -4,7 +4,6 @@
 
 var geocoder;
 var map;
-var infowindow = new google.maps.InfoWindow();
 var marker;
 
 $(document).ready(function () {

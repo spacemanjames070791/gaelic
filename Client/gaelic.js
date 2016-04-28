@@ -6,10 +6,11 @@ var totalQuestions = 0;
 /*globals $, popupConfirm, popupAlert, userEmail URL */
 //var URL = "http://gaelic-1281.appspot.com/";
 var URL = "http://localhost:8080/";
-localStorage.setItem("loggedin", 1);
-localStorage.setItem("currentuser", "Neil");
+localStorage.setItem("loggedin", 0);
+localStorage.setItem("currentuser", "");
 
 $(document).ready(function(){
+
     if(!!navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(handlePosition);
         }
@@ -39,7 +40,7 @@ function answerBox() {
 
 function upQuestion(){
     qnumber++;
-    if(qnumber>totalQuestions)
+    if(qnumber>totalQuestions-1)
         qnumber=0;
 
     doGet();

@@ -139,77 +139,6 @@ class Location(webapp2.RequestHandler):
 		else:
 			self.response.write(callback + '([' + jsonresponse[:-1] + ']);')
 
-class LoadQuestions(webapp2.RequestHandler):
-
-	def get(self):
-		useremail = 'neil@mars.com'
-		user = User(id=useremail)
-		user.useremail = useremail
-		user.username = 'Neil'
-		user.password = 'nimbus'
-		user.put()
-
-		useremail = 'jamie@spacestation.com'
-		user = User(id=useremail)
-		user.useremail = useremail
-		user.username = 'Jamie'
-		user.password = 'crazyfrog'
-		user.put()
-
-		question = 'What is the word for cold?'
-		msg = Question(id=question)
-		msg.message = 'What is the word for cold?'
-		msg.opt1 = 'fuar'
-		msg.opt2 = 'blah'
-		msg.opt3 = 'fliuch'
-		msg.opt4 = 'tioram'
-		msg.answer = 'fuar'
-		msg.put()
-
-		question = 'What is the word for Butter?'
-		msg = Question(id=question)
-		msg.message = 'What is the word for Butter?'
-		msg.opt1 = 'an t-aran'
-		msg.opt2 = 'an t-im'
-		msg.opt3 = 'an t-uisge'
-		msg.opt4 = 'am bainne'
-		msg.answer = 'an t-im'
-		msg.put()
-
-		question = 'What is the correct grammar for "I am going to be happy"?'
-		msg = Question(id=question)
-		msg.message = 'What is the correct grammar for "I am going to be happy"'
-		msg.opt1 = 'Bi toilichte!'
-		msg.opt2 = 'Bidh thu toilichte.'
-		msg.opt3 = 'Bithibh toilichte!'
-		msg.opt4 = 'Tha mi gu bhith toilichte'
-		msg.answer = 'Tha mi gu bhith toilichte'
-		msg.put()
-
-		englishWord = 'Hello'
-		word = Word(id=englishWord)
-		word.englishWord = 'Hello'
-		word.gaelicWord = 'Halo'
-		word.pronunciation = 'pronounce'
-		word.plural = 'plural'
-		word.put()
-
-		englishWord = 'Welcome'
-		word = Word(id=englishWord)
-		word.englishWord = 'Welcome'
-		word.gaelicWord = 'Faite'
-		word.pronunciation = 'pronounce'
-		word.plural = 'plural'
-		word.put()
-
-		townName = 'Glasgow'
-		town = Town(id=townName)
-		town.townName = townName
-		town.gaelic = 'Ghlaschu'
-		town.put()
-
-		self.response.write("OK")
-
 class QuestionHandler(webapp2.RequestHandler):
 
 	def get(self):
@@ -258,19 +187,19 @@ class MainHandler(webapp2.RequestHandler):
 		user.password = 'crazyfrog'
 		user.put()
 
-		question = 'What is the word for Water?'
-		msg = Question(id=question)
-		msg.question = question
+		message = 'What is the word for Water?'
+		msg = Question(id=message)
+		msg.message = message
 		msg.opt1 = 'an t-aran'
 		msg.opt2 = 'an t-im'
 		msg.opt3 = 'an t-uisge'
 		msg.opt4 = 'am bainne'
-		msg.answer = 'am bainne'
+		msg.answer = 'an t-uisge'
 		msg.put()
 
-		question = 'What is the word for Butter?'
-		msg = Question(id=question)
-		msg.question = question
+		message = 'What is the word for Butter?'
+		msg = Question(id=message)
+		msg.message = message
 		msg.opt1 = 'an t-aran'
 		msg.opt2 = 'an t-im'
 		msg.opt3 = 'an t-uisge'
@@ -278,9 +207,9 @@ class MainHandler(webapp2.RequestHandler):
 		msg.answer = 'an t-im'
 		msg.put()
 
-		question = 'What is the word for Milk?'
-		msg = Question(id=question)
-		msg.question = question
+		message = 'What is the word for Milk?'
+		msg = Question(id=message)
+		msg.message = message
 		msg.opt1 = 'an t-aran'
 		msg.opt2 = 'an t-im'
 		msg.opt3 = 'an t-uisge'
@@ -288,9 +217,9 @@ class MainHandler(webapp2.RequestHandler):
 		msg.answer = 'am bainne'
 		msg.put()
 
-		question = 'What is the word for Bread?'
-		msg = Question(id=question)
-		msg.question = question
+		message = 'What is the word for Bread?'
+		msg = Question(id=message)
+		msg.message = message
 		msg.opt1 = 'an t-aran'
 		msg.opt2 = 'an t-im'
 		msg.opt3 = 'an t-uisge'
@@ -323,7 +252,6 @@ class MainHandler(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
-    ('/load', LoadQuestions),
 	('/translateWord/(.*)', TranslateWord),
 	('/questions', QuestionHandler),
 	('/register', NewUser),
