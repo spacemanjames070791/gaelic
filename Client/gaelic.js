@@ -4,9 +4,9 @@ var answered = 0;
 var totalQuestions = 0;
 
 /*globals $, popupConfirm, popupAlert, userEmail URL */
-//var URL = "http://gaelic-1281.appspot.com/";
 var URL = "http://gaelic-1281.appspot.com/";
-localStorage.setItem("loggedin", 0);
+//var URL = "http://localhost:8080/";
+localStorage.setItem("loggedin", 1);
 localStorage.setItem("currentuser", "");
 
 $(document).ready(function(){
@@ -25,7 +25,11 @@ $(document).ready(function(){
 function answerBox() {
     answered++;
     if ($(this).text() == answer){
+        alert("Correct!")
         score++;
+    }
+    else{
+        alert("Incorrect! The answer is " + answer);
     }
 
     upQuestion();
@@ -49,12 +53,11 @@ function upQuestion(){
 function doTranslate() {
     $.ajax({
         type: "GET",
-        url: URL + "translateWord/" + $("#singleWord").val(),
+        url: URL + "translateWord/" + $("#singleWord").val().toLowerCase(),
         async: true,
         contentType: "application/javascript",
         dataType: 'jsonp',
         success: function (json) {
-
             handleWord(json);
         },
         error: function (e) {
@@ -75,7 +78,12 @@ function doGet() {
             dataType: 'jsonp',
             success: function (json) {
                 totalQuestions = json.length;
-                handleJsonResponse(json);
+
+                localStorage.setItem("localquestions", json);
+                if(json=="")
+                    handleJsonResponse(localStorage.localquestions)
+                else
+                    handleJsonResponse(json);
             },
             error: function (e) {
                 popupConfirm("Error", e.message);
@@ -96,25 +104,27 @@ function handleJsonResponse(json) {
     //}
     answer=json[qnumber].answer;
     $("#questions").html(html).listview('refresh');
-    $("#option1").on('click', answerBox);
-    $("#option2").on('click', answerBox);
-    $("#option3").on('click', answerBox);
-    $("#option4").on('click', answerBox);
+    $("#opt1").on('click', answerBox);
+    $("#opt2").on('click', answerBox);
+    $("#opt3").on('click', answerBox);
+    $("#opt4").on('click', answerBox);
 }
 
 function handleWord(json) {
     var index, html = "";
+    if(json=="")
+        alert("Word not found");
     for(index=json.length-1; index>=0; index--){
-        $("#answer").val((json[0].gaelicWord));
+        $("#answer").val((json[0].gaelicWord) + " (" + json[0].pronunciation + ")");
     }
 }
 
 function formatMessage(ques) {
     html = "<li><div class='ui-li-desc'>" + "<h5 style ='white-space:normal;' class='ui-li-heading'>" + ques.question + "</h5>" +
-        "<li>" + "<a class ='choose' id='option1' href='#'>" + ques.option1 + "</a>" + "</li>" +
-        "<li>" + "<a class ='choose' id='option2' href='#'>" + ques.option2 + "</a>" + "</li>" +
-        "<li>" + "<a class ='choose' id='option3' href='#'>" + ques.option3 + "</a>" + "</li>" +
-        "<li>" + "<a class ='choose' id='option4' href='#'>" + ques.option4 + "</a>" + "</li>";
+        "<li>" + "<a class ='choose' id='opt1' href='#'>" + ques.option1 + "</a>" + "</li>" +
+        "<li>" + "<a class ='choose' id='opt2' data-theme='b' href='#'>" + ques.option2 + "</a>" + "</li>" +
+        "<li>" + "<a class ='choose' id='opt3' href='#'>" + ques.option3 + "</a>" + "</li>" +
+        "<li>" + "<a class ='choose' id='opt4' href='#'>" + ques.option4 + "</a>" + "</li>";
     html += "</div></li>";
     return html;
 }
