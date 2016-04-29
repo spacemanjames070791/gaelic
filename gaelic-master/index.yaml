@@ -1,0 +1,27 @@
+indexes:
+
+- kind: Word
+  properties:
+  - name: englishWord
+  - name: gaelicWord
+  - name: pronunciation
+
+- kind: Question
+  properties:
+  - name: question
+  - name: answer
+  - name: option1
+  - name: option2
+  - name: option3
+  - name: option4
+
+- kind: Town
+  properties:
+  - name: townName
+  - name: gaelic
+
+- kind: User
+  properties:
+  - name: useremail
+  - name: username
+  - name: password
