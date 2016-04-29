@@ -37,8 +37,6 @@ class Word(ndb.Model):
 	englishWord = ndb.StringProperty()
 	gaelicWord = ndb.StringProperty()
 	pronunciation = ndb.StringProperty()
-	plural = ndb.StringProperty()
-	timestamp = ndb.DateTimeProperty(auto_now_add=True)
 
 	def toString(self):
 		return self.englishWord + ':' + self.gaelicWord + ':'
@@ -49,7 +47,6 @@ class Word(ndb.Model):
 			"englishWord": self.englishWord,
 			"gaelicWord": self.gaelicWord,
 			"pronunciation": self.pronunciation,
-			"plural": self.plural
 		}
 		return json.encode(jsonword)
 
@@ -186,58 +183,58 @@ class TestHandler(webapp2.RequestHandler):
 		user.password = 'crazyfrog'
 		user.put()
 
-		question = "How do you say 'I don't understand?'"
+		question = 'What is the word for Water?'
 		qst = Question(id=question)
 		qst.question = question
-		qst.option1 = "Chan eil mi 'tuigsinn"
-		qst.option2 = "Chan eil a 'tuigsinn"
-		qst.option3 = "Chan eil 'tuigsinn"
-		qst.option4 = "Chan eil mi a 'tuigsinn"
-		qst.answer = "Chan eil mi a 'tuigsinn"
+		qst.option1 = 'an t-aran'
+		qst.option2 = 'an t-im'
+		qst.option3 = 'an t-uisge'
+		qst.option4 = 'am bainne'
+		qst.answer = 'an t-uisge'
 		qst.put()
 
-		question = "How many different forms of the definite article are there in Scots Gaelic?"
+		question = 'What is the word for Butter?'
 		qst = Question(id=question)
 		qst.question = question
-		qst.option1 = "8"
-		qst.option2 = "1"
-		qst.option3 = "4"
-		qst.option4 = "6"
-		qst.answer = "8"
+		qst.option1 = 'an t-aran'
+		qst.option2 = 'an t-im'
+		qst.option3 = 'an t-uisge'
+		qst.option4 = 'am bainne'
+		qst.answer = 'an t-im'
 		qst.put()
 
-		question = "Which definite article is used in front of masculine words beginning with the consonants 'b,f,m and p'?"
+		question = 'What is the word for Milk?'
 		qst = Question(id=question)
 		qst.question = question
-		qst.option1 = "a'"
-		qst.option2 = "an"
-		qst.option3 = "na"
-		qst.option4 = "am"
-		qst.answer = "am"
+		qst.option1 = 'an t-aran'
+		qst.option2 = 'an t-im'
+		qst.option3 = 'an t-uisge'
+		qst.option4 = 'am bainne'
+		qst.answer = 'am bainne'
 		qst.put()
 
-		question = "When should the definite article 'an' be used?"
+		question = 'What is the word for Bread?'
 		qst = Question(id=question)
 		qst.question = question
-		qst.option1 = "Before masculine words beginning with a vowel"
-		qst.option2 = "Before feminine words beginning with a vowel	"
-		qst.option3 = "Before feminine words beginning with a constenant"
-		qst.option4 = "Before masculine words beginning with a constenant"
-		qst.answer = "Before feminine words beginning with a vowel"
+		qst.option1 = 'an t-aran'
+		qst.option2 = 'an t-im'
+		qst.option3 = 'an t-uisge'
+		qst.option4 = 'am bainne'
+		qst.answer = 'an t-aran'
 		qst.put()
 
-		englishWord = 'hello'
+		englishWord = 'Hello'
 		word = Word(id=englishWord)
-		word.englishWord = englishWord
+		word.englishWord = 'Hello'
 		word.gaelicWord = 'Halo'
 		word.pronunciation = 'pronounce'
 		word.put()
 
-		englishWord = 'welcome'
+		englishWord = 'Welcome'
 		word = Word(id=englishWord)
-		word.englishWord = englishWord
+		word.englishWord = 'Welcome'
 		word.gaelicWord = 'Faite'
-		word.pronunciation = 'Fah-ti'
+		word.pronunciation = 'pronounce'
 		word.put()
 
 		townName = 'Glasgow'
