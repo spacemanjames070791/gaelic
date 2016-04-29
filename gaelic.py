@@ -186,60 +186,58 @@ class TestHandler(webapp2.RequestHandler):
 		user.password = 'crazyfrog'
 		user.put()
 
-		question = 'What is the word for Water?'
+		question = "How do you say 'I don't understand?'"
 		qst = Question(id=question)
 		qst.question = question
-		qst.option1 = 'an t-aran'
-		qst.option2 = 'an t-im'
-		qst.option3 = 'an t-uisge'
-		qst.option4 = 'am bainne'
-		qst.answer = 'an t-uisge'
+		qst.option1 = "Chan eil mi 'tuigsinn"
+		qst.option2 = "Chan eil a 'tuigsinn"
+		qst.option3 = "Chan eil 'tuigsinn"
+		qst.option4 = "Chan eil mi a 'tuigsinn"
+		qst.answer = "Chan eil mi a 'tuigsinn"
 		qst.put()
 
-		question = 'What is the word for Butter?'
+		question = "How many different forms of the definite article are there in Scots Gaelic?"
 		qst = Question(id=question)
 		qst.question = question
-		qst.option1 = 'an t-aran'
-		qst.option2 = 'an t-im'
-		qst.option3 = 'an t-uisge'
-		qst.option4 = 'am bainne'
-		qst.answer = 'an t-im'
+		qst.option1 = "8"
+		qst.option2 = "1"
+		qst.option3 = "4"
+		qst.option4 = "6"
+		qst.answer = "8"
 		qst.put()
 
-		question = 'What is the word for Milk?'
+		question = "Which definite article is used in front of masculine words beginning with the consonants 'b,f,m and p'?"
 		qst = Question(id=question)
 		qst.question = question
-		qst.option1 = 'an t-aran'
-		qst.option2 = 'an t-im'
-		qst.option3 = 'an t-uisge'
-		qst.option4 = 'am bainne'
-		qst.answer = 'am bainne'
+		qst.option1 = "a'"
+		qst.option2 = "an"
+		qst.option3 = "na"
+		qst.option4 = "am"
+		qst.answer = "am"
 		qst.put()
 
-		question = 'What is the word for Bread?'
+		question = "When should the definite article 'an' be used?"
 		qst = Question(id=question)
 		qst.question = question
-		qst.option1 = 'an t-aran'
-		qst.option2 = 'an t-im'
-		qst.option3 = 'an t-uisge'
-		qst.option4 = 'am bainne'
-		qst.answer = 'an t-aran'
+		qst.option1 = "Before masculine words beginning with a vowel"
+		qst.option2 = "Before feminine words beginning with a vowel	"
+		qst.option3 = "Before feminine words beginning with a constenant"
+		qst.option4 = "Before masculine words beginning with a constenant"
+		qst.answer = "Before feminine words beginning with a vowel"
 		qst.put()
 
-		englishWord = 'Hello'
+		englishWord = 'hello'
 		word = Word(id=englishWord)
-		word.englishWord = 'Hello'
+		word.englishWord = englishWord
 		word.gaelicWord = 'Halo'
 		word.pronunciation = 'pronounce'
-		word.plural = 'plural'
 		word.put()
 
-		englishWord = 'Welcome'
+		englishWord = 'welcome'
 		word = Word(id=englishWord)
-		word.englishWord = 'Welcome'
+		word.englishWord = englishWord
 		word.gaelicWord = 'Faite'
-		word.pronunciation = 'pronounce'
-		word.plural = 'plural'
+		word.pronunciation = 'Fah-ti'
 		word.put()
 
 		townName = 'Glasgow'
