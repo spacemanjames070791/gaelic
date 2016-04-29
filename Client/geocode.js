@@ -1,5 +1,5 @@
 /**
- * Created by Neil on 26/04/2016.
+ * Created by Neil on 26/04/2016. Adapted from geo-location example by Alistair McMonnies
  */
 
 var geocoder;
