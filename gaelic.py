@@ -37,9 +37,10 @@ class Word(ndb.Model):
 	englishWord = ndb.StringProperty()
 	gaelicWord = ndb.StringProperty()
 	pronunciation = ndb.StringProperty()
+	wordType = ndb.StringProperty()
 
 	def toString(self):
-		return self.englishWord + ':' + self.gaelicWord + ':'
+		return self.englishWord + ':' + self.gaelicWord + ':' + self.pronunciation + ':' + self.wordType + ':'
 
 	def toJSON(self):
 		jsonword = {
@@ -47,6 +48,7 @@ class Word(ndb.Model):
 			"englishWord": self.englishWord,
 			"gaelicWord": self.gaelicWord,
 			"pronunciation": self.pronunciation,
+			"wordType": self.wordType,
 		}
 		return json.encode(jsonword)
 
@@ -166,7 +168,7 @@ class TranslateWord(webapp2.RequestHandler):
 			self.response.write('[' + jsonresponse[:-1] + ']')
 		else:
 			self.response.write(callback + '([' + jsonresponse[:-1] + ']);')
-
+			
 class TestHandler(webapp2.RequestHandler):
 	def get(self):
 		useremail = 'neil@mars.com'
@@ -256,7 +258,7 @@ class MainHandler(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
 	('/', MainHandler),
-    ('/fill', TestHandler),
+    	('/fill', TestHandler),
 	('/translateWord/(.*)', TranslateWord),
 	('/questions', QuestionHandler),
 	('/register', NewUser),
