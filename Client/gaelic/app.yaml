@@ -1,0 +1,28 @@
+application: gaelic-1281
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /favicon\.ico
+  static_files: images/favicon.ico
+  upload: /images/favicon\.ico
+  
+- url: /images
+  static_dir: html/manifest.appache
+  mime_type: text/cache-manifest
+  
+- url: /js/(.*\.js)
+  mime_type: text/javascript
+  static_files: js/\1
+  upload: js/(.*\.js)
+
+- url: /stylesheets
+  static_dir: stylesheets 
+
+- url: /html
+  static_dir: Client
+
+- url: /.*
+  script: gaelic.app
