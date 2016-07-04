@@ -5,6 +5,7 @@ indexes:
   - name: englishWord
   - name: gaelicWord
   - name: pronunciation
+  - name: wordType
 
 - kind: Question
   properties:
