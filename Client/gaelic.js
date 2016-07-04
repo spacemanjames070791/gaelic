@@ -115,7 +115,7 @@ function handleWord(json) {
     if(json=="")
         alert("Word not found");
     for(index=json.length-1; index>=0; index--){
-        $("#answer").val((json[0].gaelicWord) + " (" + json[0].pronunciation + ")");
+        $("#answer").val((json[0].gaelicWord) + "(" + json[0].pronunciation + ")" + "(" + json[0].wordType + ")");
     }
 }
 
